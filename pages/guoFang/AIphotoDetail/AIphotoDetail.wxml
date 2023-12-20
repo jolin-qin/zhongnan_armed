@@ -1,0 +1,10 @@
+<view class="container">
+		<!-- 主题列表 -->
+		<view class="img_container">
+				<view class="img_item">
+					<image src="{{showPicture}}" data-index="{{index}}" class="height" bindtap="viewBigPic"></image>
+				</view>
+				<image src="{{imgUrl}}AI/zmjzz_jt.png" class="arrow__img"></image>
+				<image src="{{imgUrl}}AI/zmjzz_btn_save.png" class="tips__img"></image>
+		</view>
+</view>

@@ -1,0 +1,119 @@
+page {
+	min-height: 100%;
+	background: url('https://zntest.wxumi.com/guofang/beijing.png') no-repeat center top;
+  background-size: cover;
+}
+.send_danmu_wrapper {
+    padding: 80rpx 24rpx 150rpx;
+}
+.send_danmu_item {
+    align-items: flex-start !important;
+}
+.send_danmu_item .left_content {
+    margin-bottom: 40rpx;
+}
+.danmu_content {
+    background: #54C0B1;
+    height: 84rpx;
+    line-height: 84rpx;
+    border-radius: 8rpx;
+    padding: 0 20rpx;
+    margin-bottom: 24rpx;
+		color: #fff;
+    position: relative;
+}
+.danmu_content::after {
+    display: block;
+    content: '';
+    position: absolute;
+    right: -20rpx;
+    top: 28rpx;
+    width: 0;
+    height: 0;
+    border-top: 14rpx solid transparent;
+    border-bottom: 14rpx solid transparent;
+    border-left: 20rpx solid #54C0B1;
+}
+.send_time {
+    font-size: 24rpx;
+    color: #999;
+    margin-right: 20rpx;
+}
+.status_btn {
+    width: 100rpx;
+    height: 36rpx;
+    line-height: 32rpx;
+    flex: 0 0 100rpx;
+    text-align: center;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+}
+.ongoing {
+    border: 2rpx solid #FFCC35;
+    background: #FFFAD6;
+    color: #FFCC35;
+}
+.not_pass_status {
+    border: 2rpx solid red;
+    background: #E3A2AF;
+    color: red;
+}
+.had_pass_status {
+    border: 2rpx solid #11D01A;
+    background: #D0FFCF;
+    color: #11D01A;
+}
+.portrait {
+    width: 84rpx;
+    height: 84rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 26rpx;
+}
+
+
+
+
+
+
+.bottom_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #E9E9E9;
+}
+.bottom_container .tips {
+    height: 60rpx;
+    line-height: 60rpx;
+    background: #f5f5f5;
+    font-size: 24rpx;
+    text-align: center;
+    color: #ff3838;
+}
+.bottom_container .send_wrapper {
+    padding: 0 24rpx;
+    height: 90rpx;
+}
+.bottom_container .send_input {
+    width: 560rpx;
+    flex: 0 0 560rpx;
+    height: 70rpx;
+}
+.bottom_container .send_input .weui_input {
+    width: 100%;
+    height: 70rpx;
+    background: #fff;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+}
+.bottom_container .send_bth {
+	width: 124rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	text-align: center;
+	background-color: #169B8A;
+	border-radius: 8rpx;
+	color: #fff;
+}

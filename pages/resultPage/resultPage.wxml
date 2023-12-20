@@ -1,0 +1,48 @@
+<view class="container">
+    <image class="main_title01" src="../../images/tongyong_biaoti.png" mode="scaleToFill"></image>
+    <view class="start_wrapper">
+        <!-- 个人信息 -->
+        <view class="infor_wrapper flex_center">
+            <view class="head_portrait">
+                <image class="height" src="{{resultObj.userImg}}" mode="scaleToFill"></image>
+            </view>
+            <view class="name">{{resultObj.name}}</view>
+            <view class="grade">{{resultObj.college}}</view>
+        </view>
+        <!-- 测试参数 -->
+        <view class="data_wrapper">
+            <view class="score">No.{{resultObj.testId}}</view>
+            <view>用时 <text class="score">{{resultObj.useTime}}</text> 秒</view>
+            <view>排名：<text class="score">{{resultObj.rank}}</text></view>
+            <view>分数：<text class="score">{{resultObj.testScore}}</text></view>
+        </view>
+        <!-- 获得称号 -->
+        <view class="designation_wrapper flex_center">
+            <view class="title">获得称号</view>
+            <view class="flex_center">
+                <view class="chenghao">{{resultObj.testTitle}}</view>
+                <block>
+                    <image class="img height" src="../../images/badge01.png" mode="scaleToFill"></image>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view>
+        <!-- 成功 -->
+        <view wx:if="{{result}}" class="success_wrapper">
+            <image class="success_picture" src="../../images/dt_cg.png" mode="scaleToFill"></image>
+            <view class="targeting_btn flex_center" bindtap="callScan">
+                <text class="txt">去打靶</text>
+                <image class="img" src="../../images/saoyisao.png" mode="scaleToFill"></image>
+            </view>
+        </view>
+        <!-- 失败 -->
+        <view wx:else class="fail_wrapper">
+            <view class="fail_picture">
+                <view class="scoreNumber">{{resultObj.differTestScore}}</view>
+            </view>
+            <view class="angin_btn" bindtap="answerAgain">再次答题</view>
+        </view>
+    </view>
+</view>
+

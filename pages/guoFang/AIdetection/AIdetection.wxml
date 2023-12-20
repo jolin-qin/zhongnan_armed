@@ -1,0 +1,27 @@
+<view class="container">
+    <image class="main_title01" src="{{imgUrl}}AI/zmjzz_biaoti1.png" mode="scaleToFill"></image>
+    <view class="start_wrapper">
+        <!-- 个人信息 -->
+        <view class="infor_wrapper flex_center">
+            <view class="head_portrait">
+                <image class="height" src="{{resultObj.headImgUrl}}" mode="scaleToFill"></image>
+            </view>
+        </view>
+        <view class="name">{{resultObj.name}}</view>
+        <view class="grade">{{resultObj.departmentName}}{{resultObj.gradeName}}{{resultObj.className}}</view>
+        
+				<block>
+						<image wx:if="{{result}}" class="pass__img height" src="{{imgUrl}}AI/zmjzz_zi_tongguo.png" mode="scaleToFill"></image>
+						<image wx:else class="nopass__img height" src="{{imgUrl}}AI/zmjzz_zi_weidabiao.png" mode="scaleToFill"></image>
+				</block>
+    </view>
+    <block>
+			<view wx:if="{{result}}" class="new__success">
+				<image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_kspz.png" mode="scaleToFill" bindtap="goPage"></image>
+			</view>
+			<view wx:else class="new__fail">
+				<image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_kscs.png" mode="scaleToFill" bindtap="goPage"></image>
+			</view>
+		</block>
+</view>
+

@@ -1,0 +1,31 @@
+<view class="container">
+    <view class="send_danmu_wrapper">
+        <view class="send_danmu_item flex_end" wx:for="{{list}}" wx:key="index">
+            <view class="left_content">
+                <view class="danmu_content">{{item.text}}</view>
+                <view class="flex_center">
+                    <text class="send_time">{{item.date}}</text>
+                    <block>
+                        <view class="had_pass_status status_btn" wx:if="{{item.approveStatus === '02'}}">已通过</view>
+                        <view class="not_pass_status status_btn" wx:elif="{{item.approveStatus === '03'}}">未通过</view>
+                        <view class="ongoing status_btn" wx:else>审核中</view>
+                    </block>
+                </view>
+            </view>
+            <view class="portrait">
+                <image class="height" src="{{headImgUrl}}"></image>
+            </view>
+        </view>
+        
+    </view>
+    <!-- 底部 -->
+    <view class="bottom_container">
+        <view class="tips">发送弹幕需审核,请文明用语</view>
+        <view class="send_wrapper flex_between">
+            <view class="send_input">
+                <input class="weui_input" value="{{inputValue}}" maxlength="15" bindinput="bindKeyInput" placeholder="最多不超过15个字" />
+            </view>
+            <view class="send_bth" bindtap="sendText">发送</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,41 @@
+<view class="container">
+		<image src="{{imgUrl}}ding.png" mode="scaleToFill" class="ding__logo"></image>
+		<image src="{{imgUrl}}AI/zmjzz_biaoti4.png" mode="scaleToFill" class="title__img"></image>
+		<view class="swiper-wrapper">
+				<image src="{{imgUrl}}AI/zmjzz_lsjl.png" mode="scaleToFill" class="history_title"></image>
+				<swiper class="swiper-content" autoplay="{{true}}" interval="2000" duration="500" display-multiple-items="{{5}}" circular="true">
+						<swiper-item class="swiper-item" wx:for="{{list}}" wx:key="index">
+								<image
+									src="{{item.aiImgPath}}"
+									class="swiper-img"
+									data-type="history"
+									data-index="{{index}}"
+									bindtap="goDetailPage">
+								</image>
+						</swiper-item>
+				</swiper>
+		</view>
+		<!-- 主题列表 -->
+		<view class="img_container">
+			<view class="img__top">
+				<image src="{{imgUrl}}AI/zmjzz_d12A.png" mode="scaleToFill" class="height"></image>
+				<image src="{{imgUrl}}AI/zmjzz_xzhy.png" mode="scaleToFill" class="choose__title__img"></image>
+			</view>
+			<view class="img__middle">
+				<block wx:if="{{myList.length}}">
+					<view class="img_item" wx:for="{{myList}}" wx:key="index">
+						<image
+							src="{{item.aiImgPath}}"
+							data-type="my"
+							data-index="{{index}}"
+							class="height"
+							bindtap="goDetailPage">
+						</image>
+					</view>
+				</block>
+				<view class="no__data" wx:else>暂无数据</view>
+			</view>
+			<image src="{{imgUrl}}AI/zmjzz_d12C.png" mode="scaleToFill" class="img__bottom"></image>
+		</view>
+		
+</view>

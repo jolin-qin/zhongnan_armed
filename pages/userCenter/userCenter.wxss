@@ -1,0 +1,489 @@
+
+.container {
+	min-height: 100%;
+	/* padding-top: 1px; */
+	padding-bottom: 1px;
+	position: relative;
+	background: url('https://zntest.wxumi.com/guofang/beijing.png') no-repeat center top;
+	background-size: cover;
+}
+.rank_btn {
+	display: block;
+	width: 198rpx;
+	height: 66rpx;
+	position: absolute;
+	top: 50rpx;
+	right: 30rpx;
+	z-index: 1;
+}
+.haha {
+	overflow: hidden;
+}
+.haha .title_pic {
+	display: block;
+	width: 410rpx;
+	height: 200rpx;
+	margin: 166rpx auto 66rpx;
+}
+.start_wrapper {
+	width: 616rpx;
+	height: 710rpx;
+	background: url('https://zntest.wxumi.com/armed/sy_bg.png') no-repeat center;
+	background-size: 616rpx 710rpx;
+	margin: 62rpx auto 0;
+	position: relative;
+	/* overflow: hidden; */
+	padding-top: 230rpx;
+}
+.head_portrait {
+	width: 136rpx;
+	height: 136rpx;
+	border-radius: 50%;
+	overflow: hidden;
+	position: absolute;
+	background-color: #fff;
+	top: 14rpx;
+	left: 50%;
+	transform: translate(-55%);
+	
+}
+.s_btn {
+	display: block;
+	width: 466rpx;
+	height: 134rpx;
+}
+.knowledge_btn {
+	margin: 0 auto;
+}
+.shoot_btn,.not_shoot_btn {
+	margin: 58rpx auto 0;
+}
+.condition {
+	color: #95f6e9;
+	text-align: center;
+	font-size: 24rpx;
+	margin-top: 18rpx;
+}
+.condition .txt {
+	color: #fffc00;
+}
+.tips_wrapper .tips_picture {
+	display: block;
+	width: 548rpx;
+	height: 146rpx;
+	margin: 102rpx auto 0;
+}
+.tips_wrapper .knowledge_btns {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -62rpx;
+}
+.rank_btn {
+	display: block;
+	width: 198rpx;
+	height: 66rpx;
+	position: fixed;
+	top: 72rpx;
+	right: 30rpx;
+}
+
+/* 国防教育css start */
+.page_section {
+    width: 750rpx;
+	height: 424rpx;
+	overflow: hidden;
+	position: relative;
+}
+.page_section .swiper {
+    height: 424rpx;
+}
+.page_section .swiper_item image {
+    width: 100%;
+	height: 424rpx;
+}
+.audit_btn {
+	position: absolute;
+	top: 50rpx;
+	right: 50rpx;
+	width: 94rpx;
+	height: 94rpx;
+}
+.start_btn {
+  top: 180rpx;
+}
+.headPortrait {
+	position: absolute;
+	top: 50rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 134rpx;
+	height: 134rpx;
+	border-radius: 50%;
+	border: 4rpx solid #fff;
+	overflow: hidden;
+}
+.choose__avatar {
+  position: absolute;
+	top: 190rpx;
+	left: 50%;
+	transform: translateX(-50%);
+  line-height: 52rpx;
+  font-size: 32rpx;
+  color: rgb(236, 240, 10);
+  font-weight: bold;
+}
+.choose__avatar::after {
+  border: none;
+}
+.nickname {
+	position: absolute;
+	top: 262rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	line-height: 52rpx;
+	color: #fff;
+	font-size: 42rpx;
+	padding: 0 20rpx;
+	border-radius: 6rpx;
+}
+.studentStatusInfor {
+	position: absolute;
+	top: 322rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 10rpx 20rpx;
+	text-align: center;
+	border-radius: 6rpx;
+	white-space: nowrap;
+}
+.login_btn {
+	position: absolute;
+	bottom: 80rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 10rpx 20rpx;
+	border-radius: 6rpx;
+}
+.rank__entrance {
+	padding: 0 20rpx;
+}
+.rank__entrance .rank__entrance__item {
+	height: 66rpx;
+	line-height: 66rpx;
+	padding: 0 24rpx;
+	margin-top: 20rpx;
+	border-radius: 8rpx 8rpx 0 0;
+	color: #fff;
+	background-color: #19725C;
+}
+.rank__entrance .rank__entrance__item .item__title {
+	font-size: 32rpx;
+	font-weight: bold;
+}
+.rank__entrance .rank__entrance__item .item__check__btn {
+	font-size: 28rpx;
+	margin-right: 4rpx;
+}
+
+.card_wrapper {
+	width: 710rpx;
+	background: #fff;
+	border-radius: 8rpx;
+	margin: 24rpx auto;
+	overflow: hidden;
+	color: #fff;
+	position: relative;
+	z-index: 2;
+}
+.card_header {
+	height: 66rpx;
+	line-height: 66rpx;
+	background: #19725C;
+	padding: 0 20rpx;
+}
+.card_header .title_name {
+	font-size: 32rpx;
+	font-weight: bold;
+	margin-right: 50rpx;
+}
+.card_header .ranking {
+	height: 40rpx;
+	line-height: 40rpx;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 20rpx;
+	padding: 0 30rpx;
+	font-size: 28rpx;
+}
+.card_header .have_got_medal {
+	font-size: 28rpx;
+	/* margin-right: 10rpx; */
+}
+.card_header .arrow_right .arrow {
+	margin-top: 22rpx;
+}
+
+.card_wrapper .group_photo {
+	width: 100%;
+	height: 400rpx;
+	border-radius: 10rpx;
+	overflow: hidden;
+}
+.card_wrapper .AI__item {
+	width: 50%;
+	height: 630rpx;
+	overflow: hidden;
+}
+.friendly_module {
+	padding: 0 24rpx;
+	background-color: #fff;
+}
+.friendly_module .friendly_item {
+	padding: 24rpx 0;
+	border-bottom: 1px solid #e6e6e6;
+}
+.friendly_module .friendly_item:last-child {
+	border-bottom: none;
+}
+.friendly_item .score_title {
+	color: #19725C;
+	margin-right: 20rpx;
+}
+.friendly_item .score_num {
+	color: #feaf1f;
+	font-size: 36rpx;
+	font-weight: bold;
+}
+.friendly_item .score_wrapper {
+	width: 200rpx;
+	height: 36rpx;
+	margin-top: 30rpx;
+	
+	background: url("https://zntest.wxumi.com/newsImgs/XINGXING.png") no-repeat;
+	background-size: 200rpx 36rpx;
+}
+.friendly_item .score_bar {
+	height: 36rpx;
+	background: url("https://zntest.wxumi.com/newsImgs/dianxing.png") repeat-x;
+	background-size: 200rpx 36rpx;
+}
+.friendly_item .time {
+	font-size: 24rpx;
+	color: #999;
+	text-align: center;
+}
+.friendly_item .check_btn {
+	width: 140rpx;
+	height: 48rpx;
+	margin-top: 20rpx;
+}
+/* 国防教育css end*/
+
+
+/* 完善信息弹框css */
+.information_popup {
+	background-color: transparent !important;
+}
+.infor_popup_wrapper {
+	width: 680rpx;
+	/* height: 680rpx; */
+	height: 774rpx;
+    border-radius: 20rpx;
+    background-color: #003030;
+    box-sizing: border-box;
+    padding-bottom: 30rpx;
+    position: relative;
+}
+.infor_popup_wrapper .title {
+	height: 100rpx;
+	line-height: 100rpx;
+	background: #02403F;
+	text-align: center;
+	color: #91F7E9;
+	font-size: 36rpx;
+	border-radius: 20rpx 20rpx 0 0;
+}
+.infor_popup_wrapper .close {
+	position: absolute;
+	top: 26rpx;
+	right: 20rpx;
+}
+
+.formSubmit .form_item {
+	margin: 0 0 30rpx;
+	padding: 30rpx 30rpx 0;
+}
+.formSubmit .form_item .label {
+	width: 100rpx;
+	flex: 0 0 100rpx;
+	color: #91F7E9;
+}
+.formSubmit .form_item .student_status_picker,
+.formSubmit .form_item .name_input,
+.formSubmit .form_item .gender_picker
+{
+	border: 1px solid #91F7E9;
+	padding-left: 20rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	/* border-radius: 10rpx; */
+	width: 100%;
+	background-color: #000E0E;
+	color: #91F7E9;
+}
+.student_status_picker {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+.infor_submit_btn {
+	width: 200rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	padding-left: 0;
+	padding-right: 0;
+	background-color: #19725C !important;
+	margin-top: 60rpx;
+}
+.infor_submit_btn::after {
+	border: none !important;
+}
+.prompt {
+	text-align: center;
+	font-size: 24rpx;
+	margin-top: 24rpx;
+	color: red;
+}
+/* 完善信息弹框end */
+
+/* 密码弹窗css */
+.password_popup {
+    background-color: transparent !important;
+}
+.buyPopupView {
+    width: 680rpx;
+    height: 460rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 30rpx;
+    position: relative;
+}
+.buyPopupView .close {
+    position: absolute !important;
+    top: 28rpx;
+    left: 20rpx;
+}
+.buyPopupView .title {
+    text-align: center;
+    /* line-height: 60rpx; */
+	padding-top: 80rpx;
+	padding-bottom: 40rpx;
+	font-size: 32rpx;
+}
+.password_input {
+	position: fixed;
+	width: 200rpx;
+	bottom: 100rpx;
+	left: 100rpx;
+	z-index: 0;
+	opacity: 0;
+	color: transparent;
+}
+.buyPopupView .passwordInput {
+	position: absolute;
+	top: 192rpx;
+	left: 30rpx;
+	width: 108rpx;
+	height: 108rpx;
+	z-index: 3;
+	opacity: 0;
+	color: transparent;
+}
+.passwordPopup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.7);
+}
+.passwordPopup .popup_wrapper {
+	width: 680rpx;
+	border-radius: 20rpx;
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 30rpx;
+}
+.passwordBox_wrapper {
+	padding: 70rpx 50rpx 0;
+}
+.passwordBox {
+	width: 108rpx;
+	height: 108rpx;
+	line-height: 108rpx;
+	text-align: center;
+	border: 1px solid #e9e9e9;
+	border-radius: 8rpx;
+	font-size: 100rpx;
+	font-weight: bold;
+}
+.submit_record_btn {
+    width: 200rpx;
+    height: 72rpx;
+    line-height: 60rpx;
+	margin: 84rpx auto 0;
+	background: url("https://zntest.wxumi.com/newsImgs/btn2.png")no-repeat center;
+	background-size: 200rpx 72rpx;
+	color: #fff;
+	font-size: 32rpx;
+	text-align: center;
+}
+.passwordErr {
+	text-align: center;
+	color: red;
+	font-size: 28rpx;
+	margin: 40rpx 0;
+}
+
+/* 授权弹窗css */
+.authorization_popup {
+    background-color: transparent !important;
+}
+.authorization_popup_wrapper {
+	width: 500rpx;
+    height: 480rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    box-sizing: border-box;
+	padding-bottom: 30rpx;
+	padding-top: 50rpx;
+}
+.authorization_popup_wrapper .logo_icon {
+	width: 200rpx;
+	height:200rpx;
+	margin:0 auto;
+}
+.authorization_popup_wrapper .btn {
+	padding: 0;
+	margin: 0;
+	width:300rpx;
+	height:80rpx;
+	line-height:80rpx;
+	background-color:#07c160;
+	font-size:32rpx;
+	color: #fff;
+	margin: 0 auto;
+	left: 50%;
+	margin-left: -150rpx;
+	bottom:60rpx;
+	position: absolute;
+}
+
+

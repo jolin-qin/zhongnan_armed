@@ -1,0 +1,35 @@
+
+.container {
+	height: 100%;
+	background: url("https://zntest.wxumi.com/armed/bg.jpg")no-repeat center top;
+	background-size: cover;
+	overflow: hidden;
+}
+.img_container {
+    width: 720rpx;
+    height: 1120rpx;
+    margin: 176rpx auto 0;
+		background: url("https://zntest.wxumi.com/guofang/AI/zmjzz_di3.png")no-repeat center center;
+		background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+.img_container .img_item {
+	width: 450rpx;
+	height: 800rpx;
+	margin: 40rpx auto 30rpx;
+	border-radius: 4rpx;
+	overflow: hidden;
+}
+.arrow__img {
+	display: block;
+	width: 120rpx;
+	height: 80rpx;
+	margin: 0 auto;
+}
+.tips__img {
+	display: block;
+	width: 514rpx;
+	height: 108rpx;
+	margin: 30rpx auto 0;
+}

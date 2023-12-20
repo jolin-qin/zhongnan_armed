@@ -1,0 +1,56 @@
+/**index.wxss**/
+page {
+	min-height: 100%;
+	background: url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+	background-size: cover;
+}
+.container {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+.h5_title {
+	display: block;
+	width: 292rpx;
+	height: 82rpx;
+	margin: 150rpx auto 50rpx;
+}
+.progress {
+	width: 668rpx;
+	height: 40rpx;
+	margin: 30rpx auto 50rpx;
+	box-sizing: border-box;
+	background: url("https://zntest.wxumi.com/guofang/unzhang_jindu1.png") no-repeat;
+	background-size: 668rpx 40rpx;
+	padding: 4rpx 12rpx;
+	
+}
+.progress .progress__bar {
+	height: 32rpx;
+	background: url("https://zntest.wxumi.com/guofang/unzhang_jindu2.png") no-repeat;
+	background-size: 644rpx 32rpx;
+	/* background-size: 100% 100%; */
+}
+.list__item {
+	width: 690rpx;
+	height: 160rpx;
+	margin: 0 auto 30rpx;
+	padding-left: 20rpx;
+	background: url("https://zntest.wxumi.com/guofang/unzhang_kuang.png") no-repeat;
+	background-size: 690rpx 160rpx;
+}
+.list__item .item__icon {
+	display: block;
+	width: 134rpx;
+	height: 122rpx;
+	margin-right: 30rpx;
+	
+}
+.list__item .item__title {
+	font-size: 34rpx;
+	color: #fff;
+	margin-bottom: 20rpx;
+}
+.list__item .item__complete {
+	/* font-size: 34rpx; */
+	color: #169B8A;
+}

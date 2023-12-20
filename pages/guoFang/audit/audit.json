@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "审核页",
+  "usingComponents": {
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-search": "@vant/weapp/search/index",
+		"van-dialog": "@vant/weapp/dialog/index",
+		"van-datetime-picker": "@vant/weapp/datetime-picker/index"
+  }
+}

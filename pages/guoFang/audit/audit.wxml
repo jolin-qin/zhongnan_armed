@@ -1,0 +1,256 @@
+<view class="container">
+    <!-- 轮播 -->
+    <view class="page_section">
+        <swiper class="swiper" indicator-dots="{{false}}" autoplay="true" interval="2000" duration="500" circular="true" easing-function="linear">
+            <swiper-item>
+                <view class="swiper_item">
+                    <image src="{{imgFriendUrl}}banner_01.jpg"></image>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper_item">
+                    <image src="{{imgFriendUrl}}banner_02.jpg"></image>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper_item">
+                    <image src="{{imgFriendUrl}}banner_03.jpg"></image>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper_item">
+                    <image src="{{imgFriendUrl}}banner_04.jpg"></image>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view class="swiper_item">
+                    <image src="{{imgFriendUrl}}banner_05.jpg"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="headPortrait">
+            <image src="{{userInfo.headImgUrl}}" mode="aspectFit" class="height"></image>
+        </view>
+        <!-- 搜索 -->
+        <van-search value="{{ searchName }}" custom-class="searchBox" show-action bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入用户姓名搜索" wx:if="{{tabIndex === '4'}}" />
+        <view class="nickname">{{userInfo.name}}</view>
+        <!-- 欢迎语设置 -->
+        <view class="welcome" bindtap="openPopup">
+            <image class="icon" src="{{imgUrl}}audit/rukou_qiandao.png"></image>
+        </view>
+
+        <view class="welcome sign-in" bindtap="handleOpenSignInPopup">
+            <image class="icon" src="{{imgUrl}}audit/rukou_icon_lsjl.png"></image>
+        </view>
+
+        <!-- tab切换 -->
+        <scroll-view scroll-x="true" class="tab_wrapper">
+            <view class="tab_item {{tabIndex === '0' ? 'active':'' }}" data-tab="0" data-index="N" bindtap="tabClick">
+                <text class="tab_title">待审核弹幕</text>
+                <text>({{waitBarrageCount}})</text>
+            </view>
+            <view class="tab_item {{tabIndex === '1' ? 'active':'' }}" data-tab="1" data-index="Y" bindtap="tabClick">
+                <text class="tab_title">已审核弹幕</text>
+            </view>
+
+            <view class="tab_item {{tabIndex === '4' ? 'active':'' }}" data-tab="4" bindtap="tabClick">
+                <text class="tab_title">用户列表</text>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="zhanwei"></view>
+    <!-- 待审核弹幕 -->
+    <view class="danmu_tab_item" wx:if="{{tabIndex === '0'}}">
+        <view class="danmu_container">
+            <view class="danmu_item" wx:for="{{dataList}}" wx:key="index">
+                <view class="flex_start">
+                    <view class="portrait">
+                        <image class="height" src="{{item.userImg}}"></image>
+                    </view>
+                    <view class="studentInfor">
+                        <view class="name">{{item.userName}}</view>
+                        <view class="grade">{{item.college}} {{item.grade}} {{item.class}}</view>
+                    </view>
+                    <block>
+                        <!-- <view class="ongoing status_btn" wx:if="{{statusValue === '0'}}">审核中</view> -->
+                        <!-- <view class="ongoing status_btn" wx:if="{{statusValue === '1'}}">未审核</view> -->
+                        <view class="ongoing status_btn">未审核</view>
+                        <!-- <view class="had_pass_status status_btn" wx:else>已审核</view> -->
+                    </block>
+                </view>
+                <view class="danmu_wrapper">
+                    <text class="danmu_title">弹幕内容：</text>
+                    <text class="danmu_text">{{item.text}}</text>
+                </view>
+                <view class="time_wrapper flex_between">
+                    <view class="time">
+                        <text>提交时间：</text>
+                        <text>{{item.date}}</text>
+                    </view>
+                    <view class="audit__btn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="auditFun"></view>
+                </view>
+            </view>
+        </view>
+        <block>
+            <van-loading class="loading" wx:if="{{isReachBottom}}" type="spinner" />
+            <view class="noMore" wx:else>~暂无更多数据了~</view>
+        </block>
+    </view>
+    <!-- 已审核弹幕 -->
+    <view class="danmu_tab_item" wx:if="{{tabIndex === '1'}}">
+        <view class="danmu_container">
+            <view class="danmu_item" wx:for="{{dataList}}" wx:key="index">
+                <view class="flex_start">
+                    <view class="portrait">
+                        <image class="height" src="{{item.userImg}}"></image>
+                    </view>
+                    <view class="studentInfor">
+                        <view class="name">{{item.userName}}</view>
+                        <view class="grade">{{item.college}} {{item.grade}} {{item.class}}</view>
+                    </view>
+                    <!-- <view class="had_pass_status status_btn">已审核</view> -->
+                </view>
+                <view class="danmu_wrapper">
+                    <text class="danmu_title">弹幕内容：</text>
+                    <text class="danmu_text">{{item.text}}</text>
+                </view>
+                <view class="time_wrapper flex_between">
+                    <view class="time">
+                        <text decode="{{true}}">审&ensp;核&ensp;人：</text>
+                        <text>{{item.approveUserName}}</text>
+                    </view>
+                    <view class="auditBtns deleteBtn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="deleteFun"></view>
+                </view>
+            </view>
+        </view>
+        <block>
+            <van-loading class="loading" wx:if="{{isReachBottom}}" type="spinner" />
+            <view class="noMore" wx:else>~暂无更多数据了~</view>
+        </block>
+    </view>
+
+
+    <!-- 用户列表 -->
+    <view class="user_tab_item" wx:if="{{tabIndex === '4'}}">
+        <view class="danmu_container">
+            <view class="user_item" wx:for="{{dataList}}" wx:key="index">
+                <view class="flex_start">
+                    <view class="portrait">
+                        <image class="height" src="{{item.headImgUrl}}"></image>
+                    </view>
+                    <view class="studentInfor">
+                        <view class="name">{{item.name}}</view>
+                        <view class="grade">{{item.departmentIndex_name_column_qp}} {{item.gradeIndex_name_column_qp}} {{item.classIndex_name_column_qp}}</view>
+                    </view>
+                    <view class="ongoing status_btn" data-items="{{item}}" bindtap="edit">修改</view>
+                </view>
+            </view>
+        </view>
+        <block>
+            <van-loading class="loading" wx:if="{{isReachBottom}}" type="spinner" />
+            <view class="noMore" wx:else>~暂无更多数据了~</view>
+        </block>
+    </view>
+    <!-- 完善信息弹窗 -->
+    <van-popup show="{{ informationPopup }}" custom-class="information_popup" closeable close-icon="close" bind:close="onClosePopup">
+        <view class="infor_popup_wrapper">
+            <!-- <van-icon class="close" name="close" size="50rpx" bindtap="closePasswordPopup" color="#ccc" /> -->
+            <view class="title">完善学籍信息</view>
+            <form class="formSubmit" catchsubmit="formSubmit" catchreset="formReset">
+                <view class="form_item flex_start">
+                    <view class="label">学历</view>
+                    <picker class="student_status_picker" data-ids="2" bindchange="bindPickerChange" value="{{educationIndex}}" range="{{educationArr}}">
+                        <view class="picker">{{educationArr[educationIndex]}}</view>
+                    </picker>
+                </view>
+                <!-- 学籍 -->
+                <view class="form_item flex_start">
+                    <view class="label">学籍</view>
+                    <picker class="student_status_picker" mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                        <!-- <view class="picker">
+                        {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}} {{multiArray[2][multiIndex[2]]}}
+                        </view> -->
+                        <view class="picker">
+                            {{originalData[multiIndex[0]].name}} {{originalData[multiIndex[0]].gradeChildren[multiIndex[1]].name}} {{originalData[multiIndex[0]].gradeChildren[multiIndex[1]].classChildren[multiIndex[2]].name}}
+                        </view>
+                    </picker>
+                </view>
+                <!-- 姓名 -->
+                <view class="form_item flex_start">
+                    <view class="label">姓名</view>
+                    <input class="name_input" name="input" value="{{nameInput}}" bindinput="bindNameInput" placeholder="请输入姓名" maxlength="10" />
+                </view>
+
+                <view class="form_item flex_start">
+                    <view class="label">性别</view>
+                    <picker class="student_status_picker" bindchange="bindPickerChange" data-ids="1" value="{{sexIndex}}" range="{{sexArr}}" range-key="name">
+                        <view class="picker">{{sexArr[sexIndex].name}}</view>
+                    </picker>
+                </view>
+
+                <view>
+                    <button class="infor_submit_btn" type="primary" bindtap="submitStudentStatusFun">提交</button>
+                </view>
+            </form>
+        </view>
+    </van-popup>
+    <!-- 设置欢迎语弹窗 -->
+    <van-popup show="{{ welcomePopup }}" custom-class="information_popup">
+        <view class="welcome_popup">
+            <view class="title flex_start">
+                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeWelcomePopup"></image>
+                <text class="content">请输入参观单位</text>
+            </view>
+            <view class="time__item flex_between" data-type="start" bindtap="handleStartTimeClick">
+                <view>开始时间</view>
+                <view class="flex_start">
+                    <input type="text" class="input_search" value="{{startTime}}" placeholder="请选择" disabled="{{true}}" />
+                    <van-icon name="arrow" color="#999999" />
+                </view>
+            </view>
+            <view class="time__item flex_between" data-type="end" bindtap="handleStartTimeClick">
+                <view>结束时间</view>
+                <view class="flex_start">
+                    <input type="text" class="input_search" value="{{endTime}}" placeholder="请选择" disabled="{{true}}" />
+                    <van-icon name="arrow" color="#999999" />
+                </view>
+            </view>
+            <block>
+                <textarea name="welcome" value="{{inputValue}}" bindinput="bindTextAreaBlur" class="textarea"></textarea>
+                <view class="set__btn" bindtap="setFun"></view>
+            </block>
+        </view>
+    </van-popup>
+
+    <!-- 下载签到弹窗 -->
+    <van-popup
+        show="{{ signInPopup }}"
+        custom-class="information_popup"
+        closeable
+        close-icon="close"
+        bind:close="handleClickClose"
+    >
+        <view class="infor_popup_wrapper">
+            <view class="title">历史签到记录</view>
+            <scroll-view scroll-y="true" class="popup_scroll">
+                <view class="scroll__item" wx:for="{{excelList}}" wx:key="index">
+                    <view class="scroll__item__time">时间:{{item.beginTime}}--{{item.endTime}}</view>
+                    <view>内容: {{item.contentText}}</view>
+                    <view class="download__btn" data-id="{{item.id}}" data-name="{{item.contentText}}" bindtap="downloadFun"></view>
+                </view>
+            </scroll-view>
+        </view>
+    </van-popup>
+
+    <van-popup show="{{serverShow}}" position="bottom" custom-style="height: 40%;" bind:close="closeStartTimePopup">
+        <van-datetime-picker value="{{currentDate}}" type="datetime" min-date="{{minDate}}" title="请选择时间" bind:confirm="startConfirm" bind:cancel="closeStartTimePopup" />
+    </van-popup>
+
+    <!-- dialog弹出框 -->
+    <van-dialog id="van-dialog" />
+    <van-dialog use-slot title="拒绝原因说明" show="{{ show }}" show-cancel-button class-name="rejectDialog" bind:close="onClose" bind:confirm="confirmBtnFun">
+        <view class="views">
+            <textarea rows="5" class="the_input" maxlength="30" bindinput="bindtaltol" placeholder="拒绝的原因...(30字内)"></textarea>
+        </view>
+    </van-dialog>
+</view>

@@ -1,0 +1,71 @@
+<view class="container">
+    <image class="h5_title" src="{{imgUrl}}unzhang_xzq.png" mode="scaleToFill"></image>
+		<view class="progress">
+			<view class="progress__bar" style="width: {{ratio}}%"></view>
+		</view>
+		<block wx:for="{{dataList}}" wx:key="index">
+			<!-- 签到 -->
+			<view class="list__item flex_start" wx:if="{{item.keyName === 'SIGNIN'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">签到勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+			<!-- 弹幕 -->
+			<view class="list__item flex_start" wx:elif="{{item.keyName === 'BARRAGE'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">弹幕勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+			<!-- 测试 -->
+			<view class="list__item flex_start" wx:elif="{{item.keyName === 'MOBILE_TEST'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_ceshi2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">测试勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+			<!-- 最美军装 -->
+			<view class="list__item flex_start" wx:elif="{{item.keyName === 'MOBILE_AI'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">最美军装勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+			<!-- 换装 -->
+			<view class="list__item flex_start" wx:elif="{{item.keyName === 'PC_AR_HZ'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">部队换装勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+		</block>
+		
+		
+		
+		
+		
+		
+		
+    
+</view>

@@ -1,0 +1,231 @@
+<view class="container">
+		<!-- 以前武装部展示UI -->
+		<block wx:if="{{oldUserCenterPage === 'wuZhuangBu'}}">
+			<image class="rank_btn" src="../../images/rank_btn.png" mode="scaleToFill" bindtap="goRankPage"></image>
+			<!-- 回课堂选择 -->
+			<!-- <view class="audit_btn start_btn" bindtap="goStartPage">
+			    <image src="{{imgUrl}}icon_xzkt.png" mode="aspectFit" class="height"></image>
+			</view> -->
+			<view class="haha">
+				<image class="title_pic" src="../../images/sy_biaoti.png" mode="scaleToFill"></image>
+			</view>
+			<view class="start_wrapper">
+					<!-- 头像 -->
+					<view class="head_portrait">
+							<image class="height" src="{{userInfo.headImgUrl}}" mode="scaleToFill"></image>
+					</view>
+					<view wx:if="{{!scanCodeEntry}}">
+							<image class="s_btn knowledge_btn" src="../../images/zhishi_btn.png" mode="scaleToFill" bindtap="goAnswerEntryPage"></image>
+							<block>
+									<image wx:if="{{isCanShoot}}" class="s_btn shoot_btn" src="../../images/shoot_btn.png" mode="scaleToFill" bindtap="callScan"></image>
+									<image wx:else class="s_btn not_shoot_btn" src="../../images/not_shoot_btn.png" mode="scaleToFill"></image>
+							</block>
+							<view class="condition">军事知识评测达到<text class="txt">80</text>分以上才可开启</view>
+					</view>
+					<!-- 扫码进入 -->
+					<view class="tips_wrapper" wx:else>
+							<image class="tips_picture" src="../../images/sjxl_tishi2.png" mode="scaleToFill"></image>
+							<image class="s_btn knowledge_btns" src="../../images/zhishi_btn.png" mode="scaleToFill" bindtap="goAnswerEntryPage"></image>
+					</view>
+			</view>
+    </block>
+		<!-- 新的国防教育UI -->
+		<block wx:if="{{oldUserCenterPage === 'guoFang'}}">
+			<!-- 轮播 -->
+			<view class="page_section">
+			    <swiper class="swiper" indicator-dots="{{false}}" autoplay="true" interval="2000" duration="500" circular="true" easing-function="linear">
+			        <swiper-item>
+			            <view class="swiper_item"><image src="{{imgFriendUrl}}banner_01.jpg"></image></view>
+			        </swiper-item>
+			        <swiper-item>
+			            <view class="swiper_item"><image src="{{imgFriendUrl}}banner_02.jpg"></image></view>
+			        </swiper-item>
+			        <swiper-item>
+			            <view class="swiper_item"><image src="{{imgFriendUrl}}banner_03.jpg"></image></view>
+			        </swiper-item>
+			        <swiper-item>
+			            <view class="swiper_item"><image src="{{imgFriendUrl}}banner_04.jpg"></image></view>
+			        </swiper-item>
+			        <swiper-item>
+			            <view class="swiper_item"><image src="{{imgFriendUrl}}banner_05.jpg"></image></view>
+			        </swiper-item>
+			    </swiper>
+			    <!-- 审核 -->
+			    <view class="audit_btn" bindtap="openPasswordPopup">
+			        <image src="{{imgUrl}}logo.png" mode="aspectFit" class="height"></image>
+			    </view>
+			    <!-- 回课堂选择 -->
+			    <!-- <view class="audit_btn start_btn" bindtap="goStartPage">
+			        <image src="{{imgUrl}}icon_xzkt.png" mode="aspectFit" class="height"></image>
+			    </view> -->
+			    <!-- 头像 -->
+			    <view class="headPortrait">
+			        <block>
+			            <image wx:if="{{hasUserInfo}}" src="{{userInfo.headImgUrl}}" mode="aspectFit" class="height"></image>
+			            <image wx:else src="../../images/gezi.png" mode="aspectFit" class="height"></image>
+			        </block>
+			    </view>
+			    <button
+			    	wx:if="{{hasUserInfo}}"
+			    	open-type="chooseAvatar"
+			    	bindchooseavatar="getUserImg"
+			    	class="choose__avatar">点击更改头像</button>
+			    <!-- 学籍信息 -->
+			    <block>
+			        <view wx:if="{{hasStudentInfor}}">
+			            <view class="nickname">{{userInfo.name}}</view>
+			            <view class="studentStatusInfor">
+			                <view class="grade">{{userInfo.departmentName}} {{userInfo.gradeName ? userInfo.gradeName : ''}} {{userInfo.className}}</view>
+			            </view>
+			        </view>
+			        <view wx:else class="login_btn" bindtap="openAuthorizationPopupFun">完善学籍信息</view>
+			    </block>
+			</view>
+			
+			<!-- <view bindtap="goAnswerPage">去答题页</view> -->
+			
+			<!-- 排行榜入口 -->
+			<view class="rank__entrance">
+				<view class="rank__entrance__item flex_between" bindtap="goGuoFangRankPage">
+					<text class="item__title">答题测试</text>
+					<view class="flex_start">
+						<view class="item__check__btn">去排行榜</view>
+						<van-icon name="arrow" size="36rpx" color="#fff" />
+					</view>
+				</view>
+				<!-- 内容 -->
+				<view class="friendly_module">
+				    <view class="friendly_item flex_between" wx:for="{{friendlyValueList}}" wx:key="index">
+				        <view class="left_content">
+				            <view>
+				                <text class="score_title">测试评分</text>
+				                <text class="score_num">{{item.friendlyValue}}</text>
+				            </view>
+				            <view class="score_wrapper">
+				                <view class="score_bar" style="width: {{item.starLevel * 20}}%"></view>
+				            </view>
+				        </view>
+				        <view class="right_content">
+				            <view class="time">{{item.createTime}}</view>
+										<image 
+											src="{{imgUrl}}rukou_btn_chakan.png"
+											mode="scaleToFill"
+											class="check_btn"
+											data-id="{{item.friendlyId}}"
+											bindtap="checkFriendValueFun">
+										</image>
+				        </view>
+				    </view>
+				</view>
+			</view>
+			<!-- AR换装 -->
+			<view class="card_wrapper">
+			    <!-- 头部 -->
+			    <view class="card_header flex_between" bindtap="goARphotoList">
+			        <view class="left_title">
+			            <view class="title_name">与国之重器合影</view>
+			        </view>
+			        <view class="right_content flex_start">
+			            <view class="have_got_medal">更多照片</view>
+			            <view class="arrow_right">
+			                <van-icon name="arrow" size="36rpx" color="#fff" class="arrow" />
+			            </view>
+			        </view>
+			    </view>
+			    <!-- 内容 -->
+			    <view class="group_photo">
+			        <image src="{{ARimg}}" mode="scaleToFill" class="height"></image>
+			    </view>
+			</view>
+			<!-- AI军装照 -->
+			<view class="card_wrapper">
+			    <!-- 头部 -->
+			    <view class="card_header flex_between"  bindtap="goAIphotoList">
+			        <view class="left_title">
+			          <view class="title_name">最美军装照</view>
+			        </view>
+			        <view class="right_content flex_start">
+			            <view class="have_got_medal">更多照片</view>
+			            <view class="arrow_right">
+			                <van-icon name="arrow" size="36rpx" color="#fff" class="arrow" />
+			            </view>
+			        </view>
+			    </view>
+					<!-- 内容 -->
+					<view class="flex_start">
+						<view class="AI__item" wx:for="{{AIimg}}" wx:key="index">
+						    <image src="{{item.aiImgPath}}" mode="scaleToFill" class="height"></image>
+						</view>
+					</view>
+			</view>
+		</block>
+		
+		<!-- 完善信息弹窗 -->
+		<van-popup show="{{ informationPopup }}" custom-class="information_popup">
+		    <view class="infor_popup_wrapper">
+		        <view class="title">修改学籍信息</view>
+		        <form class="formSubmit" catchsubmit="formSubmit" catchreset="formReset">
+		            <view class="form_item flex_start">
+		                <view class="label">学历</view>
+		                <picker class="student_status_picker" bindchange="bindPickerChange" data-ids="2" value="{{educationIndex}}" range="{{educationArr}}">
+		                    <view class="picker">{{educationArr[educationIndex]}}</view>
+		                </picker>
+		            </view>
+		            <!-- 学籍 -->
+		            <view class="form_item flex_start">
+		                <view class="label">学籍</view>
+		                <picker class="student_status_picker" mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+		                    <view class="picker">
+		                    {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}} {{multiArray[2][multiIndex[2]]}}
+		                    </view>
+		                </picker>
+		            </view>
+		            <!-- 姓名 -->
+		            <view class="form_item flex_start">
+		                <view class="label">姓名</view>
+		                <input class="name_input" name="input" value="{{nameInput}}" bindinput="bindNameInput" placeholder="请输入姓名" maxlength="10" />
+		            </view>
+								
+								<view class="form_item flex_start">
+								    <view class="label">性别</view>
+								    <picker class="student_status_picker" bindchange="bindPickerChange" data-ids="1" value="{{sexIndex}}" range="{{sexArr}}" range-key="name">
+								        <view class="picker">{{sexArr[sexIndex].name}}</view>
+								    </picker>
+								</view>
+								
+		            <view>
+		                <button class="infor_submit_btn" type="primary" bindtap="submitStudentStatusFun">提交</button>
+		            </view>
+		            <view class="prompt">实名认证登陆，参与活动奖励多多哦！</view>
+		        </form>
+		    </view>
+		</van-popup>
+		
+		<!-- 密码弹窗 -->
+		<van-popup show="{{ passwordPopup }}" custom-class="password_popup">
+		    <view class="buyPopupView">
+		        <van-icon class="close" name="close" size="50rpx" bindtap="closePasswordPopup" color="#ccc" />
+		        <view class="title">请输入密码</view>
+		        <view class="popup_wrapper flex_between">
+		            <view class="passwordBox">{{passwordList[0]}}</view>
+		            <view class="passwordBox">{{passwordList[1]}}</view>
+		            <view class="passwordBox">{{passwordList[2]}}</view>
+		            <view class="passwordBox">{{passwordList[3]}}</view>
+		        </view>
+		        <view class="passwordErr" wx:if="{{errorTips}}">密码错误</view>
+		        <!-- 输入密码input -->
+		        <input class="passwordInput" type="number" value="{{inputValue}}"  maxlength="4" bindinput="bindKeyInput" focus="{{focus}}" />
+		    </view>
+		</van-popup>
+		
+		<!-- 输入密码input -->
+		<input class="password_input" type="number" value="{{inputValue}}"  maxlength="4" bindinput="bindKeyInput" focus="{{focus}}" />
+		
+    <!-- 授权弹窗 -->
+    <van-popup show="{{ authorizationPopup }}" closeable close-icon-position="top-left" custom-class="authorization_popup" bind:close="closeAuthorizationPopupFun">
+        <view class="authorization_popup_wrapper">
+            <view class="logo_icon"><image class="height" src="{{imgUrl}}logo.png"></image></view>
+            <button class="btn" bindtap="getUserProfile">微信一键登陆</button>
+        </view>
+    </van-popup>
+</view>

@@ -1,0 +1,18 @@
+<!--pages/camera/camera.wxml-->
+<view class="container">
+    <!-- <view class="zhanwei"></view> -->
+    <camera
+			class="camera"
+			device-position="front"
+			flash="off"
+			resolution="low"
+			binderror="error"
+			style="width: 600rpx; height: 1066rpx; margin: 50rpx auto;">
+		</camera>
+    <cover-view class="dask_view" bindtap="takePhoto">拍照</cover-view>
+        <!-- <button type="primary" bindtap="takePhoto"></button> -->
+    
+    <!-- 
+    <view>预览</view>
+    <image mode="widthFix" src="{{src}}"></image> -->
+</view>

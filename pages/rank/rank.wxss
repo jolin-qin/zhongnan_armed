@@ -1,0 +1,146 @@
+page {
+	background: #011715 url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+    background-size: 100% auto;
+    overflow-x: hidden;
+}
+.fixed_wrapper {
+    position: fixed;
+    width: 100%;
+    height: 380rpx;
+    left: 0;
+    top: 0;
+    background: #011715 url('https://zntest.wxumi.com/armed/phb_bg2.png') no-repeat center top;
+    background-size: 100% 380rpx;
+    z-index: 5;
+}
+.title_pic1 {
+	display: block;
+	width: 352rpx;
+	height: 40rpx;
+	margin: 150rpx auto 30rpx;
+}
+.title_pic2 {
+	display: block;
+	width: 582rpx;
+	height: 78rpx;
+	margin: 0 auto 16rpx;
+}
+.tab_wrapper {
+    width: 720rpx;
+    margin: 0 auto;
+}
+.tab_wrapper .img_item {
+    flex: 1;
+    height: 66rpx;
+}
+.zhanwei {
+    width: 100%;
+    height: 380rpx;
+}
+.return_btn {
+	display: block;
+	width: 164rpx;
+	height: 66rpx;
+	position: fixed;
+	top: 72rpx;
+	right: 30rpx;
+}
+
+.rank_wrapper {
+    width: 716rpx;
+    border: 1px solid #138F80;
+    border-top: none;
+    margin: 0 auto 24rpx;
+    /* min-height: calc(100vh - 534rpx); */
+    min-height: calc(100vh - 520rpx);
+    color: #88e5d9;
+    background-image: linear-gradient(#003231, #003030);
+}
+.title-top {
+    text-align: center;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-weight: bold;
+    background: #014444;
+    
+    /* padding: 0 24rpx; */
+}
+.title-top .first {
+    width: 18%;
+}
+.title-top .second {
+    width: 46%;
+}
+.title-top .third {
+    width: 18%;
+}
+.title-top .fourth {
+    width: 18%;
+}
+.rank_item {
+    padding: 24rpx 0;
+}
+.rank_item .first_pic {
+    display: block;
+    width: 46rpx;
+    height: 56rpx;
+    margin: 0 auto;
+}
+.ranking {
+    width: 18%;
+    text-align: center;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.ranking_userinfo {
+    width: 46%;
+}
+.user_photo {
+    width: 80rpx;
+    flex: 0 0 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20rpx;
+}
+.rank_container {
+    padding-bottom: 152rpx;
+}
+.rank_item .xing_ming {
+    /* text-align: center; */
+    margin-bottom: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rank_item .class_grade {
+    /* width: 100%; */
+    font-size: 24rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    padding: 0 10rpx;
+    background-color: #77D6D3;
+    border-radius: 16rpx;
+    color: #000;
+}
+.total_number {
+    text-align: center;
+    width: 18%;
+}
+.time_consuming {
+    width: 18%;
+    text-align: center;
+}
+.my_ranking {
+    position: fixed;
+    bottom: 0;
+    width: 716rpx;
+    height: 152rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    background: url('https://zntest.wxumi.com/armed/phb_bg.png') no-repeat center;
+    background-size: 716rpx 152rpx;
+    color: #fff;
+    padding-top: 0;
+    padding-bottom: 30rpx;
+}

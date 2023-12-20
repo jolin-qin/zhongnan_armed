@@ -1,0 +1,114 @@
+<view class="container">
+    <view class="fixed_wrapper">
+        <image class="title_pic3" src="../../../images/zhishi01.png" mode="scaleToFill"></image>
+        <!-- 返回 -->
+        <!-- tab切换 -->
+        <view class="tab_wrapper flex_center">
+            <view class="img_item" data-index="{{0}}" data-id="{{'1'}}" bindtap="chooseTab">
+                <image src="../../../images/phb_gr.png" wx:if="{{active === 0}}" class="height had_chioce"></image>
+                <image src="../../../images/phb_gr2.png" wx:else class="height"></image>
+            </view>
+            <view class="img_item" data-index="{{1}}" data-id="{{'2'}}" bindtap="chooseTab">
+                <image src="../../../images/phb_xy2.png" wx:if="{{active === 1}}" class="height had_chioce"></image>
+                <image src="../../../images/phb_xy.png" wx:else class="height"></image>
+            </view>
+        </view>
+    </view>
+    <view class="zhanwei"></view>
+    <!-- 个人排名 -->
+    <view class="rank_wrapper primary_rank" wx:if="{{tabIndex === '1'}}">
+        <!-- 排名标题 -->
+        <view class="title-top flex_start">
+            <view class="first">排名</view>
+            <view class="second">姓名</view>
+            <view class="third">分数</view>
+            <view class="fourth">用时</view>
+            <view class="fivth">称号</view>
+        </view>
+        <!-- 列表 -->
+        <view class="rank_container">
+            <view wx:for="{{badgePersonalList}}" wx:key="index" class="rank_item flex_start">
+                <block>
+                    <view wx:if="{{index === 0}}" class="ranking">
+                        <image src="../../../images/sjxl_1.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:elif="{{index === 1}}" class="ranking">
+                        <image src="../../../images/sjxl_2.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:elif="{{index === 2}}" class="ranking">
+                        <image src="../../../images/sjxl_3.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:else class="ranking">{{index + 1}}</view>
+                </block>
+                
+                <view class="ranking_userinfo flex_start">
+                    <view class="user_photo">
+                        <image class="height" src="{{item.userHead}}" mode="aspectFit"></image>
+                    </view>
+                    <view class="username">
+                        <view class="xing_ming">{{item.userName}}</view>
+                        <view class="class_grade">{{item.className}}</view>
+                    </view>
+                </view>
+
+                <view class="total_number">{{item.score}}</view>
+                <view class="time_consuming">{{item.time}}秒</view>
+                <view class="medal">{{item.medal}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 学院排名 -->
+    <view class="rank_wrapper primary_rank" wx:if="{{tabIndex === '2'}}">
+        <!-- 排名标题 -->
+        <view class="title-top title_top_college flex_start">
+            <view class="first">排名</view>
+            <view class="second">学院</view>
+            <view class="third">参与人数</view>
+            <view class="fourth">总分数</view>
+        </view>
+        <!-- 列表 -->
+        <view class="rank_container">
+            <view wx:for="{{badgeCollegeList}}" wx:key="index" class="rank_item flex_start">
+                <block>
+                    <view wx:if="{{index === 0}}" class="ranking ranking_new">
+                        <image src="../../../images/sjxl_1.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:elif="{{index === 1}}" class="ranking ranking_new">
+                        <image src="../../../images/sjxl_2.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:elif="{{index === 2}}" class="ranking ranking_new">
+                        <image src="../../../images/sjxl_3.png" class="height first_pic"></image>
+                    </view>
+                    <view wx:else class="ranking ranking_new">{{index + 1}}</view>
+                </block>
+                <view class="ranking_userinfo ranking_userinfo_new">{{item.academy}}</view>
+                <view class="total_number total_number_new">{{item.userCount}}</view>
+                <view class="time_consuming time_consuming_new">{{item.totalScore}}</view>
+            </view>
+        </view>
+    </view>
+    
+    <!-- 个人排名 -->
+    <view class="rank_item my_ranking flex_start" wx:if="{{tabIndex === '1' && myPersonalRank}}">
+        <view class="ranking">{{myPersonalRank.rank}}</view>
+        <view class="ranking_userinfo flex_start">
+            <view class="user_photo">
+                <image class="height" src="{{myPersonalRank.userHead}}" mode="aspectFit"></image>
+            </view>
+            <view class="username">
+                <view class="xing_ming">{{myPersonalRank.userName}}</view>
+                <view class="class_grade">{{myPersonalRank.className}}</view>
+            </view>
+        </view>
+        <view class="total_number">{{myPersonalRank.score}}</view>
+        <view class="time_consuming">{{myPersonalRank.time}}秒</view>
+        <view class="medal">{{myPersonalRank.medal}}</view>
+    </view>
+    <!-- 院校排名 -->
+    <view class="rank_item my_ranking flex_start" wx:if="{{tabIndex === '2' && myCollegeRank}}">
+        <view class="ranking">{{myCollegeRank.rank}}</view>
+        <view class="ranking_userinfo ranking_userinfo_new">{{myCollegeRank.academy}}</view>
+        <view class="total_number total_number_new">{{myCollegeRank.userCount}}</view>
+        <view class="time_consuming time_consuming_new">{{myCollegeRank.totalScore}}</view>
+    </view>
+</view>

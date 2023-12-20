@@ -1,0 +1,37 @@
+page {
+    height: 100vh;
+    /* background: url('https://zntest.wxumi.com/newsImgs/meng_ceng.png') no-repeat center top; */
+    /* background-size: 100% auto; */
+    /* background-size: cover; */
+    background-color: black;
+}
+.container {
+    height: 100vh;
+    position: relative;
+		overflow: hidden;
+}
+.dask_view {
+	width: 356rpx;
+	height: 126rpx;
+	line-height: 120rpx;
+	position: absolute;
+	bottom: 150rpx;
+	left: 50%;
+	margin-left: -178rpx;
+	text-align: center;
+	font-size: 36rpx;
+	font-weight: bold;
+	color: #fff;
+	background: url('https://zntest.wxumi.com/guofang/AI/dt_btn_l2.png') no-repeat;
+	background-size: cover;
+}
+.dask_view .img{
+    width: 100%;
+    height: 100%;
+}
+/* .zhanwei {
+    height: 400rpx;
+} */
+.camera {
+    margin: 0 auto;
+}

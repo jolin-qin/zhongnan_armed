@@ -1,0 +1,34 @@
+<view class="container">
+    <image class="rank_btn" src="../../images/rank_btn.png" mode="scaleToFill" bindtap="goRankingPage"></image>
+    <image class="main_title01" src="../../images/cinfirm_title01.png" mode="scaleToFill"></image>
+    <image class="main_title02" src="../../images/cinfirm_title02.png" mode="scaleToFill"></image>
+    <view class="start_wrapper">
+        <!-- 头像 -->
+        <view class="head_portrait">
+            <image class="height" src="{{userInfo.headImgUrl}}" mode="scaleToFill"></image>
+        </view>
+        <view class="information_item">姓名：{{userName}}</view>
+        <view class="information_item">学院：{{college}}</view>
+        <view class="information_item">班级：{{className}}</view>
+        <image class="have_got_img" src="../../images/sjxl_zige.png" mode="scaleToFill"></image>
+        <!-- <view class="condition">军事知识评测达到<text class="txt">80</text>分以上才可开启</view> -->
+        <!-- 打靶选择 -->
+        <view class="btn_wrapper flex_between">
+            <image class="primary_btn btn_item" data-index="1" src="../../images/sjxl_btn_1.png" mode="scaleToFill" bindtap="choose"></image>
+            <image class="intermediate_btn btn_item" data-index="2" src="../../images/sjxl_btn_2.png" mode="scaleToFill" bindtap="choose"></image>
+            <image class="senior_btn btn_item" data-index="3" src="../../images/sjxl_btn_3.png" mode="scaleToFill" bindtap="choose"></image>
+        </view>
+    </view>
+    <!-- 确认弹窗 -->
+    <van-popup show="{{ confirmPopup }}" closeable close-icon="https://zntest.wxumi.com/armed/sjxl_btn_guanbi.png" close-icon-position="top-right" custom-class="confirm_popup" bind:close="closeConfirmPopupFun">
+        <view class="confirm_popup_wrapper">
+            <block>
+                <image wx:if="{{chooseIndex === '1'}}" class="chuji img" src="../../images/sjxl_chujiba.png"></image>
+                <image wx:elif="{{chooseIndex === '2'}}" class="gaoji img" src="../../images/sjxl_gaojiba.png"></image>
+                <image wx:else class="yidong img" src="../../images/sjxl_yidongba.png"></image>
+            </block>
+            <view class="confirm_txt">是否确认选择——<text class="{{textColor}}">{{name}}</text></view>
+            <view class="confirm_btn" bindtap="confirmFun">确认</view>
+        </view>
+    </van-popup>
+</view>

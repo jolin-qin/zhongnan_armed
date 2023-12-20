@@ -1,0 +1,18 @@
+<view class="container">
+    <image class="title_pic1" src="../../images/cinfirm_title01.png" mode="scaleToFill"></image>
+    <image class="title_pic2" src="../../images/cinfirm_title02.png" mode="scaleToFill"></image>
+    <view class="start_wrapper">
+        <!-- 头像 -->
+        <view class="head_portrait">
+            <image class="height" src="{{userInfo.headImgUrl}}" mode="scaleToFill"></image>
+        </view>
+        <!-- 请在前屏完成射击 -->
+        <view class="tips_wrapper">
+            <image class="tips_picture" src="../../images/sjxl_tishi.png" mode="scaleToFill"></image>
+            <image class="s_btn knowledge_btn" src="../../images/sjxl_btn_4.png" mode="scaleToFill" bindtap="goUserCenter"></image>
+        </view>
+    </view>
+    <!-- 排行榜入口 -->
+    <image class="rank_btn" src="../../images/rank_btn.png" mode="scaleToFill" bindtap="goRankingPage"></image>
+</view>
+

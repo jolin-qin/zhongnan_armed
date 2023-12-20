@@ -1,0 +1,64 @@
+page {
+	background: url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.container {
+	padding-top: 1px;
+}
+.title_pic1 {
+	display: block;
+	width: 352rpx;
+	height: 40rpx;
+	margin: 186rpx auto 30rpx;
+}
+.title_pic2 {
+	display: block;
+	width: 582rpx;
+	height: 78rpx;
+	margin: 0 auto 66rpx;
+}
+.start_wrapper {
+	width: 616rpx;
+	height: 710rpx;
+	background: url('https://zntest.wxumi.com/armed/sy_bg.png') no-repeat center;
+	background-size: 616rpx 710rpx;
+	margin: 62rpx auto 0;
+	position: relative;
+	/* overflow: hidden; */
+	padding-top: 230rpx;
+}
+.head_portrait {
+	width: 136rpx;
+	height: 136rpx;
+	border-radius: 50%;
+	overflow: hidden;
+	position: absolute;
+	background-color: #fff;
+	top: 14rpx;
+	left: 50%;
+	transform: translate(-55%);
+}
+.tips_picture {
+	display: block;
+	width: 476rpx;
+	height: 196rpx;
+	margin: 10rpx auto 10rpx;
+}
+.knowledge_btn {
+	display: block;
+	width: 362rpx;
+	height: 130rpx;
+	position: absolute;
+	bottom: -74rpx;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.rank_btn {
+	display: block;
+	width: 198rpx;
+	height: 66rpx;
+	position: fixed;
+	top: 72rpx;
+	right: 30rpx;
+}

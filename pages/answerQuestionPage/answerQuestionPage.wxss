@@ -1,0 +1,218 @@
+/* pages/anserEntryPage/anserEntryPage.wxss */page {
+	background: url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.container {
+	padding-top: 1px;
+}
+.main_title01 {
+	display: block;
+	width: 580rpx;
+	height: 162rpx;
+	margin: 110rpx auto 0;
+}
+.start_wrapper {
+	width: 714rpx;
+    /* height: 334rpx; */
+    height: 360rpx;
+	background: url('https://zntest.wxumi.com/armed/dt_bg.png') no-repeat center top;
+	background-size: 714rpx 360rpx;
+	margin: 20rpx auto 0;
+	position: relative;
+    color: #88e5d9;
+    padding: 2rpx;
+}
+/* 对错列表 */
+.classlist_wrapper {
+    color: #000;
+    padding-right: 40rpx;
+    margin-top: 34rpx;
+}
+.classlist_wrapper .design {
+    font-size: 0;
+    width: 36rpx;
+    height: 36rpx;
+    overflow: hidden;
+    margin-right: 20rpx;
+    border-radius: 50%;
+    background-color: #063743;
+    border: 4rpx solid #1CBABC;
+}
+.classlist_wrapper .design iamge {
+    display: block;
+    width: 28rpx;
+    height: 28rpx;
+}
+.classlist_wrapper .progress {
+    width: 64rpx;
+    text-align: center;
+}
+/* 答题倒计时 */
+.timer_wrapper {
+    height: 50rpx;
+    color: #000;
+    text-align: right;
+    padding: 0 64rpx;
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+}
+.timer_wrapper .category {
+    height: 36rpx;
+    line-height: 36rpx;
+    background-color: #1CBABC;
+    border-radius: 8rpx;
+    padding: 0 12rpx;
+}
+.timer_wrapper .timer {
+    width: 60rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+    background-color: #1CBABC;
+    border-radius: 8rpx;
+}
+/* 题目内容 */
+.title_wrapper {
+    opacity: 1;
+    transform: translateY(-50rpx);
+}
+/* 以前的 */
+/* .title_wrapper .title {
+    text-align: center;
+    line-height: 50rpx;
+} */
+.title_wrapper .title {
+    margin-top: 30rpx;
+    padding: 0 50rpx;
+    line-height: 38rpx;
+}
+.title_wrapper .content {
+    width: 516rpx;
+    height: 334rpx;
+    margin: 20rpx auto 0;
+}
+/* 答案选项 */
+.answer_wrapper {
+    width: 642rpx;
+    /* height: 130rpx; */
+    margin: 30rpx auto 0;
+    opacity: 0;
+    transform: translateY(50rpx);
+}
+.answer_wrapper .item {
+    width: 642rpx;
+    height: 118rpx;
+    position: relative;
+    margin-bottom: 20rpx !important;
+
+}
+.answer_wrapper .item .proportion {
+    width: 118rpx;
+    height: 92rpx;
+    line-height: 92rpx;
+    position: absolute;
+    top: -50rpx;
+    right: -30rpx;
+    background: url('https://zntest.wxumi.com/armed/dt_qipao.png') no-repeat center;
+    background-size: 118rpx 92rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 26rpx;
+    padding-left: 26rpx;
+    transform: scale(0);
+}
+.answer_wrapper .item .txt {
+    width: 642rpx;
+    height: 118rpx;
+    line-height: 112rpx;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+	font-size: 32rpx;
+	font-weight: bold;
+	color: #fff;
+	text-shadow:0 0 5px #000;
+}
+/* 题目css动画 */
+.titleAnimationAppear {
+    animation: titleAnimationAppear 1s 1 linear forwards;
+}
+.titleAnimationDisappear {
+    animation: titleAnimationDisappear 0.5s 1 linear forwards;
+}
+@keyframes titleAnimationAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-50rpx);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes titleAnimationDisappear {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-50rpx);
+    }
+}
+
+/* 答案列表动画 */
+.answerAnimationAppear {
+    animation: answerAnimationAppear 1s 1 linear forwards;
+}
+.answerAnimationDisappear {
+    animation: answerAnimationDisappear 0.5s 1 linear forwards;
+}
+@keyframes answerAnimationAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50rpx);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes answerAnimationDisappear {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(50rpx);
+    }
+}
+/* 百分比动画 */
+.proportionAnimationAppear {
+    animation: proportionAnimationAppear 1s 1 linear forwards;
+}
+.proportionAnimationDisappear {
+    animation: proportionAnimationDisappear 0.3s 1 linear forwards;
+}
+@keyframes proportionAnimationAppear {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes proportionAnimationDisappear {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}

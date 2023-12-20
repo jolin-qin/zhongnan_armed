@@ -1,0 +1,61 @@
+<view class="container">
+    <image class="main_title01" src="../../images/tongyong_biaoti.png" mode="scaleToFill"></image>
+    <view class="start_wrapper">
+        <!-- 对错列表 -->
+        <view class="classlist_wrapper flex_end">
+            <view class="list_item flex_start">
+                <view class="design flex_center">
+                    <image wx:if="{{isRight[0] === '2'}}" class="height" src="../../images/dt_cuo.png" mode="scaleToFill"></image>
+                    <image wx:if="{{isRight[0] === '1'}}" class="height" src="../../images/dt_dui.png" mode="scaleToFill"></image>
+                </view>
+                <view class="design flex_center">
+                    <image wx:if="{{isRight[1] === '2'}}" class="height" src="../../images/dt_cuo.png" mode="scaleToFill"></image>
+                    <image wx:if="{{isRight[1] === '1'}}" class="height" src="../../images/dt_dui.png" mode="scaleToFill"></image>
+                </view>
+                <view class="design flex_center">
+                    <image wx:if="{{isRight[2] === '2'}}" class="height" src="../../images/dt_cuo.png" mode="scaleToFill"></image>
+                    <image wx:if="{{isRight[2] === '1'}}" class="height" src="../../images/dt_dui.png" mode="scaleToFill"></image>
+                </view>
+                <view class="design flex_center">
+                    <image wx:if="{{isRight[3] === '2'}}" class="height" src="../../images/dt_cuo.png" mode="scaleToFill"></image>
+                    <image wx:if="{{isRight[3] === '1'}}" class="height" src="../../images/dt_dui.png" mode="scaleToFill"></image>
+                </view>
+                <view class="design flex_center">
+                    <image wx:if="{{isRight[4] === '2'}}" class="height" src="../../images/dt_cuo.png" mode="scaleToFill"></image>
+                    <image wx:if="{{isRight[4] === '1'}}" class="height" src="../../images/dt_dui.png" mode="scaleToFill"></image>
+                </view>
+            </view>
+            <view class="progress">{{titleNumber}}/5</view>
+        </view>
+        <view class="timer_wrapper flex_between">
+            <view class="category">{{currentQuesTionObj.questionName}}</view>
+            <view class="timer">{{times}}s</view>
+        </view>
+        <!-- 题目 -->
+        <view class="title_wrapper {{titleAnimation}}">
+            <view class="title">{{currentQuesTionObj.questionContent}}</view>
+            <!-- <view class="content" wx:if="{{currentQuesTionObj.questionImgs.length > 0}}">
+                <image class="height" src="{{currentQuesTionObj.questionImgs[0]}}" mode="scaleToFill"></image>
+            </view> -->
+        </view>
+    </view>
+    <!-- 答案选项 -->
+    <view class="answer_wrapper {{answerAnimation}}">
+        <view class="dui_wrapper item" wx:for="{{currentQuesTionObj.answerList}}" wx:key="index" data-index="{{index}}" data-answerresult="{{item.id}}" bindtap="clickAnswerFun">
+            <block>
+                <image wx:if="{{!isSelect[index]}}" class="height" src="../../images/dt_btn_l3.png" mode="scaleToFill"></image>
+                <image wx:else class="height" src="../../images/dt_btn_h3.png" mode="scaleToFill"></image>
+            </block>
+            <view class="proportion {{proportionAnimation}}">{{item.selectPercent}}</view>
+            <view class="txt">{{item.answerContent}}</view>
+        </view>
+        <!-- <view class="cuo_wrapper item" data-index="{{1}}" data-answerresult="2" bindtap="clickAnswerFun">
+            <block>
+                <image wx:if="{{!isSelect[1]}}" class="height" src="../../images/cuo.png" mode="scaleToFill"></image>
+                <image wx:else class="height" src="../../images/cuo_select.png" mode="scaleToFill"></image>
+            </block>
+            <view class="proportion {{proportionAnimation}}">{{currentQuesTionObj.answerList[1].selectPercent}}</view>
+            <view class="txt">错误</view>
+        </view> -->
+    </view>
+</view>

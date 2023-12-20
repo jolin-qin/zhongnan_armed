@@ -1,0 +1,49 @@
+/* pages/anserEntryPage/anserEntryPage.wxss */page {
+	background: url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.container {
+	padding-top: 1px;
+}
+.main_title01 {
+	display: block;
+	width: 602rpx;
+	height: 166rpx;
+	margin: 190rpx auto 0;
+}
+.middle__part {
+	width: 100%;
+	/* height: 466rpx; */
+	margin-top: 50rpx;
+}
+.update__icon {
+	display: block;
+	width: 400rpx;
+	height: 466rpx;
+}
+.updata__picture {
+	display: block;
+	/* width: 460rpx;
+    height: 466rpx; */
+    width: 460rpx;
+	height: 700rpx;
+}
+.arrow__img {
+	width: 212rpx;
+	height: 258rpx;
+}
+.left__arrow__img {
+	transform: rotate(180deg);
+	margin-left: -60rpx;
+}
+.right__arrow__img {
+	margin-right: -60rpx;
+}
+.picture__img {
+	display: block;
+	width: 362rpx;
+	height: 130rpx;
+	margin: 50rpx auto 0;
+}
+

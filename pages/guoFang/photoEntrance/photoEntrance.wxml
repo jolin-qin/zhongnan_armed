@@ -1,0 +1,33 @@
+<view class="container">
+    <image class="main_title01" src="{{imgUrl}}AI/zmjzz_biaoti2.png" mode="scaleToFill"></image>
+    <view class="middle__part flex_between">
+        <!-- 左边箭头 -->
+        <image class="arrow__img left__arrow__img" src="{{imgUrl}}AI/zmjzz_jiantou.png" mode="scaleToFill"></image>
+        <block>
+            <image
+                wx:if="{{!updataImg}}"
+                class="update__icon"
+                src="{{imgUrl}}AI/zmjzz_dcpz.png"
+                mode="scaleToFill"
+                bindtap="goTakePhotoPage">
+            </image>
+            <image wx:else class="updata__picture" src="{{updataImg}}" mode="aspectFill"></image>
+        </block>
+        <!-- 右边箭头 -->
+        <image class="arrow__img right__arrow__img" src="{{imgUrl}}AI/zmjzz_jiantou.png" mode="scaleToFill"></image>
+	</view>
+    <image
+        wx:if="{{!updataImg}}"
+        class="picture__img"
+        src="{{imgUrl}}AI/zmjzz_btn_sczp.png"
+        mode="scaleToFill"
+        bindtap="uploadImg">
+    </image>
+    <image
+        class="picture__img"
+        src="{{imgUrl}}AI/zmjzz_btn_xyb.png"
+        mode="scaleToFill"
+        bindtap="nextFun">
+    </image>
+</view>
+

@@ -1,0 +1,157 @@
+/* pages/anserEntryPage/anserEntryPage.wxss */page {
+	background: url('https://zntest.wxumi.com/armed/bg.jpg') no-repeat center top;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.container {
+	padding-top: 1px;
+}
+.main_title01 {
+	display: block;
+	width: 580rpx;
+	height: 162rpx;
+	margin: 120rpx auto 0;
+}
+.start_wrapper {
+	width: 720rpx;
+	height: 638rpx;
+	background: url('https://zntest.wxumi.com/armed/result_bg.png') no-repeat center;
+	background-size: 720rpx 638rpx;
+	margin: 0 auto;
+	position: relative;
+	color: #88e5d9;
+}
+.infor_wrapper {
+    position: absolute;
+    top: 126rpx;
+    left: 102rpx;
+    width: 222rpx;
+    flex-direction: column;
+}
+
+.infor_wrapper .head_portrait {
+	width: 136rpx;
+	height: 136rpx;
+	border-radius: 50%;
+	overflow: hidden;
+	background-color: #fff;
+}
+.infor_wrapper .name {
+    font-size: 28rpx;
+    margin: 24rpx 0 10rpx;
+}
+.infor_wrapper .grade {
+    width: 222rpx;
+    font-size: 28rpx;
+    color: #333;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.data_wrapper {
+    position: absolute;
+    top: 100rpx;
+    right: 136rpx;
+    font-size: 28rpx;
+}
+.data_wrapper view {
+    width: 200rpx;
+}
+
+.data_wrapper view {
+    margin-bottom: 24rpx;
+}
+.data_wrapper .score {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.designation_wrapper {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 120rpx;
+    flex-direction: column;
+    color: #fff;
+}
+.designation_wrapper .title {
+    font-size: 28rpx;
+    /* margin-bottom: 24rpx; */
+}
+.designation_wrapper .chenghao {
+    font-size: 40rpx;
+    font-weight: bold;
+    text-shadow: 0 0 20rpx #fff;
+}
+.designation_wrapper .img {
+    display: block;
+    width: 66rpx;
+    height: 66rpx;
+    margin-left: 20rpx;
+}
+
+/* 成功css */
+.success_wrapper .success_picture {
+    display: block;
+    width: 502rpx;
+    height: 122rpx;
+    margin: 0 auto;
+}
+.targeting_btn {
+	width: 362rpx;
+	height: 130rpx;
+	/* line-height: 130rpx; */
+	background: url('https://zntest.wxumi.com/armed/tongyong_btn_h.png') no-repeat center;
+    background-size: 362rpx 130rpx;
+    margin: 30rpx auto 0;
+	/* text-align: center; */
+}
+.targeting_btn .txt {
+    font-size: 56rpx;
+	font-weight: bold;
+	color: #fff;
+	text-shadow:0 0 5px #000;
+}
+.targeting_btn .img {
+    display: block;
+    width: 54rpx;
+    height: 54rpx;
+    margin-left: 12rpx;
+}
+/* 失败的css */
+.fail_wrapper .fail_picture {
+    width: 502rpx;
+    height: 122rpx;
+    background: url('https://zntest.wxumi.com/armed/dt_sb.png') no-repeat center;
+	background-size: 502rpx 122rpx;
+    margin: 0 auto;
+    position: relative;
+}
+.fail_wrapper .scoreNumber {
+    position: absolute;
+    left: 190rpx;
+    top: -10rpx;
+    width: 100rpx;
+    font-family: fantasy;
+    font-size: 56rpx;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(to bottom, #FFDD2C, #FF9000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+}
+.angin_btn {
+	width: 356rpx;
+	height: 126rpx;
+	line-height: 126rpx;
+	background: url('https://zntest.wxumi.com/armed/dt_btn_l2.png') no-repeat center;
+	background-size: 356rpx 126rpx;
+    text-align: center;
+    margin: 30rpx auto 0;
+    font-size: 56rpx;
+	font-weight: bold;
+	color: #fff;
+	text-shadow:0 0 5px #000;
+}

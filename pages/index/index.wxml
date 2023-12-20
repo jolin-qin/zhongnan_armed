@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header_01">中南体验课堂</view>
+  <view class="img__view">
+    <image src="{{imgFriendUrl}}index_02.png" mode="scaleToFill" class="header_02 height"></image>
+    <image src="{{imgUrl}}ding.png" mode="scaleToFill" class="header_03"></image>
+  </view>
+  <view class="entry flex_between">
+		<image src="{{imgUrl}}rukou_gfkt.png" mode="scaleToFill" class="entry__item" data-number="guoFang" bindtap="goUserCenterPage"></image>
+    <image src="{{imgUrl}}rukou_jskt.png" mode="scaleToFill" class="entry__item" data-number="wuZhuangBu" bindtap="goUserCenterPage"></image>
+  </view>
+</view>

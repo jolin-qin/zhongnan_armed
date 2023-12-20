@@ -1,0 +1,32 @@
+/**index.wxss**/
+/**index.wxss**/
+page {
+	height: 100%;
+	background: url('https://zntest.wxumi.com/guofang/ceshi/ceshi_daiji_bj.png') no-repeat center top;
+  background-size: cover;
+}
+.container {
+	position: relative;
+	height: 100%;
+}
+.header_03 {
+  width: 100%;
+  height: 180rpx;
+}
+.title {
+	display: block;
+	width: 648rpx;
+	height: 158rpx;
+	margin: 0 auto;
+}
+.start_answer_btn {
+	width: 470rpx;
+	height: 136rpx;
+	position: absolute;
+	left: 50%;
+	bottom: 200rpx;
+	
+	margin-left: -236rpx;
+	background: url('https://zntest.wxumi.com/guofang/ceshi/ceshi_btn_kscs.png') no-repeat center;
+	background-size: 470rpx 136rpx;
+}

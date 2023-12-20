@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+  <image src="{{imgUrl}}ceshi/ceshi_top.png" mode="scaleToFill" class="header_03"></image>
+	<image src="{{imgUrl}}ceshi/ceshi_biaoti.png" mode="scaleToFill" class="title"></image>
+	<view class="start_answer_btn" bindtap="startAnswerBtnFun"></view>
+</view>

@@ -1,0 +1,39 @@
+<view class="container">
+    <image class="rank_btn" src="../../images/rank_btn.png" mode="scaleToFill" bindtap="goRankPage"></image>
+    <image class="main_title01" src="../../images/tongyong_biaoti.png" mode="scaleToFill"></image>
+    <!-- <image class="main_title02" src="../../images/cinfirm_title02.png" mode="scaleToFill"></image> -->
+    <view class="start_wrapper">
+        <!-- 头像 -->
+        <view class="head_portrait">
+            <image class="height" src="{{userInfo.headImgUrl}}" mode="scaleToFill"></image>
+        </view>
+        <view class="tips" wx:if="{{hasInformation}}">请录入你的信息</view>
+        <view class="information_item flex_start">
+            <view class="label">姓名：</view>
+            <input class="name_input" name="input" value="{{nameInput}}" bindinput="bindNameInput" placeholder="请输入姓名" maxlength="10" />
+        </view>
+        <view class="information_item flex_start">
+            <view class="label">学院：</view>
+            <picker class="student_status_picker" bindchange="bindPickerChange" data-ids="2" value="{{educationIndex}}" range="{{educationArr}}">
+                <view class="picker">{{educationArr[educationIndex]}}</view>
+            </picker>
+        </view>
+        <view class="information_item flex_start">
+            <view class="label">班级：</view>
+            <input class="name_input" name="input" value="{{classInput}}" bindinput="bindClassNameInput" placeholder="请输入班级" maxlength="10" />
+        </view>
+        <view class="start_answer_btn" bindtap="startAnswerBtnFun">开始答题</view>
+    </view>
+    <!-- 确认弹窗 -->
+    <!-- <van-popup show="{{ confirmPopup }}" closeable close-icon="https://robot.qingpukj.com/armed/sjxl_btn_guanbi.png" close-icon-position="top-right" custom-class="confirm_popup" bind:close="closeConfirmPopupFun">
+        <view class="confirm_popup_wrapper">
+            <block>
+                <image wx:if="{{chooseIndex === 0}}" class="chuji img" src="../../images/sjxl_chujiba.png"></image>
+                <image wx:elif="{{chooseIndex === 1}}" class="gaoji img" src="../../images/sjxl_gaojiba.png"></image>
+                <image wx:else class="yidong img" src="../../images/sjxl_yidongba.png"></image>
+            </block>
+            <view class="confirm_txt">是否确认选择——<text class="{{textColor}}">{{name}}</text></view>
+            
+        </view>
+    </van-popup> -->
+</view>

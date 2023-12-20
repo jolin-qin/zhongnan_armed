@@ -1,0 +1,17 @@
+{
+  "name": "zhongnan_armed",
+  "version": "1.0.0",
+  "description": "中南武装部",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "武装部"
+  ],
+  "author": "qinjiulin",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.6.8"
+  }
+}
