@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+    <canvas
+        type="2d"
+        id="myCanvas"
+        canvas-id="signature"
+        bindtouchstart="canvasTouchStart"
+        bindtouchmove="canvasTouchMove"
+        bindtouchend="canvasTouchEnd">
+    </canvas>
+    <button bindtap="saveSignature">保存签名</button>
+    <image src="{{localImg}}" mode="scaleToFill"></image>
+</view>

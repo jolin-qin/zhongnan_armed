@@ -56,7 +56,11 @@ Page({
         serverShow: false,
         welcomeId: '',
         excelList: [],
-        signInPopup: false
+        signInPopup: false,
+        coachPopup: false,
+        medalPopup: false,
+        playUserList: [1,2,3,4,5,6,7,8,9], //应到人数
+        btnIndex: '0',
     },
 
     /**
@@ -865,6 +869,12 @@ Page({
     onClosePopup() {
         this.setData({ informationPopup: false });
     },
+    coachPopupClose() {
+        this.setData({ coachPopup: false });
+    },
+    medalPopupClose() {
+        this.setData({ medalPopup: false });
+    },
     bindtaltol(e) {
         this.setData({ memo: e.detail.value })
     },
@@ -882,16 +892,16 @@ Page({
             }
         })
     },
+    //打开成为教练二维码弹窗
+    handleOpenCoachPopup() {
+        this.setData({ coachPopup: true })
+    },
+    //打开获取机器人勋章弹窗
+    handleOpenMedalPopup() {
+        this.setData({ medalPopup: true })
+    },
     downloadFun(e) {
         let {id, name} = e.currentTarget.dataset
-        // common.request(API.downloadExcelApi, {
-        //     siginId: dataId
-        // }, 'application/x-www-form-urlencoded').then((res) => {
-        //     console.log("what------------:", res)
-        //     if (res.code === 200) {
-                
-        //     }
-        // })
         wx.downloadFile({
             url: `${API.downloadExcelApi}?siginId=${id}`,
             filePath: `${wx.env.USER_DATA_PATH}/${name}.xls`,

@@ -42,7 +42,14 @@
         <view class="welcome sign-in" bindtap="handleOpenSignInPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_icon_lsjl.png"></image>
         </view>
-
+        <!-- 成为教官 -->
+        <view class="new_welcome coach" bindtap="handleOpenCoachPopup">
+            <image class="icon" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
+        </view>
+        <!-- 机器人勋章 -->
+        <view class="new_welcome robot_medal" bindtap="handleOpenMedalPopup">
+            <image class="icon" src="{{imgUrl}}audit/rukou_iocn_xunzhang.png"></image>
+        </view>
         <!-- tab切换 -->
         <scroll-view scroll-x="true" class="tab_wrapper">
             <view class="tab_item {{tabIndex === '0' ? 'active':'' }}" data-tab="0" data-index="N" bindtap="tabClick">
@@ -221,7 +228,40 @@
             </block>
         </view>
     </van-popup>
-
+    <!-- 成为教官二维码 -->
+    <van-popup show="{{ coachPopup }}" custom-class="information_popup" closeable close-icon="close" bind:close="coachPopupClose">
+        <view class="coach_popup">
+            <image class="qricon" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
+            <view class="content">扫码成为教官 有效期10分钟</view>
+        </view>
+    </van-popup>
+    <!-- 设置欢迎语弹窗 -->
+    <van-popup show="{{ welcomePopup }}" custom-class="information_popup">
+        <view class="welcome_popup">
+            <view class="title flex_start">
+                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeWelcomePopup"></image>
+                <text class="content">请输入参观单位</text>
+            </view>
+            <view class="time__item flex_between" data-type="start" bindtap="handleStartTimeClick">
+                <view>开始时间</view>
+                <view class="flex_start">
+                    <input type="text" class="input_search" value="{{startTime}}" placeholder="请选择" disabled="{{true}}" />
+                    <van-icon name="arrow" color="#999999" />
+                </view>
+            </view>
+            <view class="time__item flex_between" data-type="end" bindtap="handleStartTimeClick">
+                <view>结束时间</view>
+                <view class="flex_start">
+                    <input type="text" class="input_search" value="{{endTime}}" placeholder="请选择" disabled="{{true}}" />
+                    <van-icon name="arrow" color="#999999" />
+                </view>
+            </view>
+            <block>
+                <textarea name="welcome" value="{{inputValue}}" bindinput="bindTextAreaBlur" class="textarea"></textarea>
+                <view class="set__btn" bindtap="setFun"></view>
+            </block>
+        </view>
+    </van-popup>
     <!-- 下载签到弹窗 -->
     <van-popup
         show="{{ signInPopup }}"
@@ -245,7 +285,108 @@
     <van-popup show="{{serverShow}}" position="bottom" custom-style="height: 40%;" bind:close="closeStartTimePopup">
         <van-datetime-picker value="{{currentDate}}" type="datetime" min-date="{{minDate}}" title="请选择时间" bind:confirm="startConfirm" bind:cancel="closeStartTimePopup" />
     </van-popup>
-
+    <!-- 机器人勋章列表 -->
+    <van-popup show="{{ medalPopup }}" custom-class="information_popup">
+        <view class="welcome_popup medal_popup">
+            <view class="title flex_start">
+                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="medalPopupClose"></image>
+                <block>
+                    <text class="content" wx:if="{{btnIndex === '0'}}">扫码获得勋章</text>
+                    <text class="content" wx:else>勋章列表</text>
+                </block>
+            </view>
+            <!-- 二维码展示 -->
+            <block wx:if="{{btnIndex === '0'}}">
+                <image class="getMedalQRcode" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
+            </block>
+            <!-- 勋章列表 -->
+            <block wx:else>
+                <view class="corner">
+                    <view class="corner_title">
+                        应到<text class="color_text">50</text>人，<text class="color_text">40</text>人体验
+                    </view>
+                    <!-- 勋章展示列表 -->
+                    <view class="medal_list flex_between">
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
+                            <view class="item_name">国之重器勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
+                            <view class="item_name">测试勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
+                            <view class="item_name">弹幕勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
+                            <view class="item_name">签到勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
+                            <view class="item_name">最美军装勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
+                            <view class="item_name">机器人勋章</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="medal_scroll_top flex_start">
+                    <view class="left">人名</view>
+                    <view class="right">勋章详情</view>
+                </view>
+                <scroll-view scroll-y="true" class="medal_scroll">
+                    <view class="scroll__item flex_start" wx:for="{{playUserList}}" wx:key="index">
+                        <view class="left">用户名字昵称</view>
+                        <view class="right flex_between">
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
+                            </block>
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_ceshi2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
+                            </block>
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
+                            </block>
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
+                            </block>
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
+                            </block>
+                            <block>
+                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
+                            </block>
+                        </view>
+                    </view>
+                </scroll-view>
+            </block>
+            <view class="medal_popup_btns flex_between">
+                <view class="item_btn" data-idx="0" bindtap="handleClickBtnChange">
+                    <block>
+                        <image wx:if="{{btnIndex === '0'}}" class="tabbar__icon" src="{{imgUrl}}audit/rukou_btn_1.png" mode="scaleToFill"></image>
+                        <image wx:else class="tabbar__icon" src="{{imgUrl}}audit/rukou_btn_2.png" mode="scaleToFill"></image>
+                    </block>
+                    <text class="txt">二维码</text>
+                </view>
+                <view class="item_btn" data-idx="1" bindtap="handleClickBtnChange">
+                    <block>
+                        <image wx:if="{{btnIndex === '1'}}" class="tabbar__icon" src="{{imgUrl}}audit/rukou_btn_1.png" mode="scaleToFill"></image>
+                        <image wx:else class="tabbar__icon" src="{{imgUrl}}audit/rukou_btn_2.png" mode="scaleToFill"></image>
+                    </block>
+                    <text class="txt">勋章列表</text>
+                </view>
+            </view>
+        </view>
+    </van-popup>
     <!-- dialog弹出框 -->
     <van-dialog id="van-dialog" />
     <van-dialog use-slot title="拒绝原因说明" show="{{ show }}" show-cancel-button class-name="rejectDialog" bind:close="onClose" bind:confirm="confirmBtnFun">
@@ -253,4 +394,5 @@
             <textarea rows="5" class="the_input" maxlength="30" bindinput="bindtaltol" placeholder="拒绝的原因...(30字内)"></textarea>
         </view>
     </van-dialog>
+
 </view>

@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/guoFang/audit/audit",
 			"pages/userCenter/userCenter",
 			"pages/guoFang/AIphotoDetail/AIphotoDetail",
 			"pages/guoFang/AIphotoList/AIphotoList",
@@ -18,12 +19,13 @@
 			"pages/knowledgeRank/knowledgeRank",
 			"pages/anserEntryPage/anserEntryPage",
 			"pages/guoFang/medalWall/medalWall",
-			"pages/guoFang/audit/audit",
+			
 			"pages/guoFang/barrage/barrage",
 			"pages/guoFang/testStart/testStart",
 			"pages/guoFang/guoFangRank/guoFangRank",
 			"pages/guoFang/answerQuestionPage/answerQuestionPage",
-			"pages/guoFang/resultPage/resultPage"
+            "pages/guoFang/resultPage/resultPage",
+            "pages/canvas/canvas"
     ],
     "window": {
         "backgroundTextStyle": "light",

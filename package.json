@@ -12,6 +12,7 @@
   "author": "qinjiulin",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.6.8"
+    "@vant/weapp": "^1.6.8",
+    "wx-signature": "^1.0.4"
   }
 }

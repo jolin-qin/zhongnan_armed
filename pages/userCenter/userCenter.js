@@ -714,7 +714,10 @@ Page({
 		        })
 		    } else {
 		        this.setData({ authorizationPopup: true })
-		    }
+            }
+            // wx.navigateTo({
+            //     url: '/pages/canvas/canvas'
+            // })
 		},
     /**
      * 生命周期函数--监听页面隐藏

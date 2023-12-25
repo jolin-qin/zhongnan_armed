@@ -70,7 +70,20 @@ page {
 .sign-in {
     top: 230rpx;
 }
-
+.new_welcome {
+    position: absolute;
+    top: 100rpx;
+    right: 50rpx;
+    width: 90rpx;
+    height: 90rpx;
+}
+.new_welcome .icon {
+    width: 100%;
+    height: 100%;
+}
+.robot_medal {
+    top: 230rpx;
+}
 .zhanwei {
     height: 424rpx;
 }
@@ -476,11 +489,8 @@ page {
 /* 设置欢迎语弹窗  start */
 .welcome_popup {
     width: 680rpx;
-    /* height: 552rpx; */
     height: 686rpx;
     position: relative;
-    /* background: url('https://zntest.wxumi.com/newsImgs/chengxin/ssyb_tanchuang.png') no-repeat center center;
-    background-size: 100% 100%; */
     background-color: #fff;
     border-radius: 10rpx;
     overflow: hidden;
@@ -497,7 +507,7 @@ page {
     display: block;
     width: 44rpx;
     height: 44rpx;
-    margin-right: 144rpx;
+    margin-right: 192rpx;
 }
 
 .welcome_popup .title .content {
@@ -572,6 +582,132 @@ page {
     height: 82rpx;
     margin-right: 16rpx;
 }
+/* 机器人勋章弹窗 */
+.medal_popup {
+    height: 960rpx;
+}
+.getMedalQRcode {
+    display: block;
+    width: 680rpx;
+    height: 680rpx;
+    margin-top: 30rpx;
+}
+.medal_popup .corner {
+    height: 186rpx;
+    background-color: #e9e9e9;
+    margin-top: 40rpx;
+    margin-bottom: 20rpx;
+    position: relative;
+    padding: 1px 20rpx 0 20rpx;
+}
+.medal_popup .corner .corner_title {
+    width: 372rpx;
+    height: 42rpx;
+    position: absolute;
+    top: -20rpx;
+    left: 50%;
+    margin-left: -186rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #fff;
+    background: url('https://zntest.wxumi.com/guofang/audit/jiqiren_tiao1.png') no-repeat center;
+    background-size: 372rpx 42rpx;
+}
+.medal_popup .corner .corner_title .color_text {
+    color: #eeff62;
+    font-weight: bold;
+}
+.medal_popup .medal_list {
+    margin-top: 44rpx;
+}
+.medal_popup .medal_list .medal_item {
+    text-align: center;
+}
+.medal_popup .medal_list .medal_item .item_icon {
+    width: 100rpx;
+    height: 90rpx;
+}
+.medal_popup .medal_list .medal_item .item_name {
+    font-size: 20rpx;
+    color: #19725c;
+    text-align: center;
+}
+
+
+.medal_popup .medal_scroll_top {
+    width: 600rpx;
+    margin: 0 auto;
+    background-color: #19725c;
+    color: #fff;
+    border: 1px solid #516e66;
+    border-bottom: none;
+    box-sizing: content-box;
+}
+.medal_scroll_top .left,
+.medal_scroll .scroll__item .left
+{
+    width: 33%;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.medal_popup .medal_scroll_top .right {
+    width: 67%;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+}
+.medal_scroll {
+    width: 600rpx;
+    height: 400rpx;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #526e66;
+    color: #19725c;
+}
+.medal_scroll .scroll__item {
+    padding: 10rpx 0;
+    border-bottom: 1px solid #cbd8d4;
+}
+.medal_scroll .scroll__item:last-child {
+    border-bottom: none;
+}
+.medal_scroll .scroll__item .right {
+    width: 67%;
+    padding: 0 10rpx;
+}
+.medal_scroll .scroll__item .right .item__icon {
+    width: 60rpx;
+    height: 54rpx;
+}
+.medal_popup_btns {
+    width: 600rpx;
+    margin: 30rpx auto 0;
+}
+.medal_popup_btns .item_btn {
+    width: 262rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+}
+.medal_popup_btns .item_btn .tabbar__icon {
+    width: 262rpx;
+    height: 96rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.medal_popup_btns .item_btn .txt {
+    position: relative;
+    z-index: 1;
+}
 /* 签到历史列表弹窗 */
 .popup_scroll {
     height: 612rpx;
@@ -598,4 +734,29 @@ page {
     bottom: 20rpx;
     background: url('https://zntest.wxumi.com/guofang/audit/rukou_btn_xzsj.png') no-repeat center;
     background-size: 140rpx 48rpx;
+}
+/* 成为教练二维码弹窗 */
+.coach_popup {
+    width: 600rpx;
+    height: 600rpx;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+.coach_popup .qricon {
+    width: 500rpx;
+    height: 500rpx;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+}
+.coach_popup .content {
+    width: 100%;
+    height:100rpx;
+    line-height: 100rpx;
+    background-color: #19725c;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
 }
