@@ -61,6 +61,7 @@ Page({
         medalPopup: false,
         playUserList: [1,2,3,4,5,6,7,8,9], //应到人数
         btnIndex: '0',
+        coachImgUrl: '', //成为教官二维码
     },
 
     /**
@@ -894,7 +895,12 @@ Page({
     },
     //打开成为教练二维码弹窗
     handleOpenCoachPopup() {
-        this.setData({ coachPopup: true })
+        common.request(API.getBecomeCoachQrCodeApi, {}).then((res) => {
+            console.log("excel列表成功了:", res)
+            if (res.code === 200) {
+                this.setData({ coachImgUrl: res.data, coachPopup: true })
+            }
+        })
     },
     //打开获取机器人勋章弹窗
     handleOpenMedalPopup() {

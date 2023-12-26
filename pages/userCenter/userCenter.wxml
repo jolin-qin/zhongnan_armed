@@ -228,4 +228,29 @@
             <button class="btn" bindtap="getUserProfile">微信一键登陆</button>
         </view>
     </van-popup>
+    <!-- 设置体验团队弹窗 -->
+    <van-popup show="{{ setTeamInforPopup }}" custom-class="information_popup">
+        <view class="welcome_popup">
+            <view class="title flex_center">
+                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeSetTeamInforPopup"></image>
+                <text class="content">请输入体验团队信息</text>
+            </view>
+            <view class="control_padding">
+                <view class="team_infor_title">{{teamObj.nickName}}教官带队</view>
+                <view class="input_item flex_between">
+                    <text class="item_title">团队标题：</text>
+                    <input type="text" class="input_search" value="{{teamObj.teamTitle}}" bindinput="bindTitleInput" />
+                </view>
+                <view class="input_item flex_between">
+                    <text class="item_title" decode="{{true}}">欢&ensp;迎&ensp;语：</text>
+                    <textarea name="welcome" value="{{teamObj.contentText}}" bindinput="bindTextAreaBlur" class="textarea"></textarea>
+                </view>
+                <view class="input_item flex_between">
+                    <text class="item_title">应到人数：</text>
+                    <input type="text" class="input_search" value="{{teamObj.personSum}}" bindinput="bindNunmberInput" />
+                </view>
+                <view class="set__btn" bindtap="handleSetTeamBtnClick">{{btnText}}</view>
+            </view>
+        </view>
+    </van-popup>
 </view>

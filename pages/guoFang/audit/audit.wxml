@@ -204,7 +204,7 @@
     <!-- 设置欢迎语弹窗 -->
     <van-popup show="{{ welcomePopup }}" custom-class="information_popup">
         <view class="welcome_popup">
-            <view class="title flex_start">
+            <view class="title flex_center">
                 <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeWelcomePopup"></image>
                 <text class="content">请输入参观单位</text>
             </view>
@@ -231,37 +231,12 @@
     <!-- 成为教官二维码 -->
     <van-popup show="{{ coachPopup }}" custom-class="information_popup" closeable close-icon="close" bind:close="coachPopupClose">
         <view class="coach_popup">
-            <image class="qricon" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
+            <image class="qricon" src="{{coachImgUrl}}"></image>
             <view class="content">扫码成为教官 有效期10分钟</view>
         </view>
     </van-popup>
-    <!-- 设置欢迎语弹窗 -->
-    <van-popup show="{{ welcomePopup }}" custom-class="information_popup">
-        <view class="welcome_popup">
-            <view class="title flex_start">
-                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeWelcomePopup"></image>
-                <text class="content">请输入参观单位</text>
-            </view>
-            <view class="time__item flex_between" data-type="start" bindtap="handleStartTimeClick">
-                <view>开始时间</view>
-                <view class="flex_start">
-                    <input type="text" class="input_search" value="{{startTime}}" placeholder="请选择" disabled="{{true}}" />
-                    <van-icon name="arrow" color="#999999" />
-                </view>
-            </view>
-            <view class="time__item flex_between" data-type="end" bindtap="handleStartTimeClick">
-                <view>结束时间</view>
-                <view class="flex_start">
-                    <input type="text" class="input_search" value="{{endTime}}" placeholder="请选择" disabled="{{true}}" />
-                    <van-icon name="arrow" color="#999999" />
-                </view>
-            </view>
-            <block>
-                <textarea name="welcome" value="{{inputValue}}" bindinput="bindTextAreaBlur" class="textarea"></textarea>
-                <view class="set__btn" bindtap="setFun"></view>
-            </block>
-        </view>
-    </van-popup>
+    
+    
     <!-- 下载签到弹窗 -->
     <van-popup
         show="{{ signInPopup }}"
@@ -288,7 +263,7 @@
     <!-- 机器人勋章列表 -->
     <van-popup show="{{ medalPopup }}" custom-class="information_popup">
         <view class="welcome_popup medal_popup">
-            <view class="title flex_start">
+            <view class="title flex_center">
                 <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="medalPopupClose"></image>
                 <block>
                     <text class="content" wx:if="{{btnIndex === '0'}}">扫码获得勋章</text>

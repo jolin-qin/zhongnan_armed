@@ -498,8 +498,7 @@ page {
 
 .welcome_popup .title {
     height: 100rpx;
-    padding-left: 20rpx;
-    /* border-radius: 6rpx 6rpx 0 0; */
+    position: relative;
     background-color: #19725C;
 }
 
@@ -507,7 +506,9 @@ page {
     display: block;
     width: 44rpx;
     height: 44rpx;
-    margin-right: 192rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 28rpx;
 }
 
 .welcome_popup .title .content {

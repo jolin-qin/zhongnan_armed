@@ -485,5 +485,78 @@
 	bottom:60rpx;
 	position: absolute;
 }
+/* 设置团队信息弹窗 */
+.welcome_popup {
+    width: 680rpx;
+    height: 686rpx;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.welcome_popup .title {
+    height: 100rpx;
+    background-color: #19725C;
+    position: relative;
+}
+.welcome_popup .title .icon {
+    display: block;
+    width: 44rpx;
+    height: 44rpx;
+    position: absolute;
+    left: 20rpx;
+    top: 28rpx;
+}
+.welcome_popup .title .content {
+    font-size: 40rpx;
+    color: #fff;
+}
+.welcome_popup .control_padding {
+    padding: 0 30rpx;
+}
+.welcome_popup .control_padding .input_item {
+    margin: 30rpx 0;
+}
+.welcome_popup .control_padding .team_infor_title {
+    margin: 20rpx auto 0;
+    text-align: center;
+    color: #19725C;
+    font-size: 36rpx;
+}
+.welcome_popup .control_padding .item_title {
+    color: #19725C;
+}
+.welcome_popup .control_padding .input_search {
+    width: 468rpx;
+    height: 72rpx;
+    padding: 0 20rpx;
+    
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+}
+.welcome_popup .textarea {
+    width: 468rpx;
+    height: 120rpx;
+    padding: 20rpx;
+    
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+
+}
+
+.welcome_popup .set__btn {
+    width: 262rpx;
+    height: 96rpx;
+    line-height: 90rpx;
+    text-align: center;
+    font-size: 36rpx;
+    color: #fff;
+    margin: 0 auto;
+    background: url('https://zntest.wxumi.com/guofang/audit/rukou_btn_1.png') no-repeat center center;
+    background-size: 100% 100%;
+}
 
 

@@ -1,6 +1,6 @@
 //现在的
-// const hostBase = 'https://myznpro.wxumi.com'
-const hostBase = 'https://armedzn.hnlvw.com'
+const hostBase = 'https://myznpro.wxumi.com'
+// const hostBase = 'https://armedzn.hnlvw.com'
 const imgBase = 'https://zntest.wxumi.com'
 const api = {
 	imgFriendUrl: imgBase + '/newsImgs/',//借用友善厅的图片地址
@@ -49,6 +49,11 @@ const api = {
     signInApi: hostBase+'/armed/phone/setWelcomeGuestsDate',//签到
     getSignInListApi: hostBase+'/armed/phone/findSiginList',//获取签到活动列表
     downloadExcelApi: hostBase+'/armed/phone/total/excel',//下载excel
-	changeAvatarApi: hostBase+'/armed/login/uploadUserHeadImgToIo',//更换头像
+    changeAvatarApi: hostBase+'/armed/login/uploadUserHeadImgToIo',//更换头像
+    // 2023-12-22新增
+    getBecomeCoachQrCodeApi: hostBase+'/armed/phone/getInstructorQrCode',//获取成为教官二维码
+    becomeCoachApi: hostBase+'/armed/phone/scanInstructorQrCode',//扫码成为教官
+    cancelCoachApi: hostBase+'/armed/phone/cancelInstructor',//取消成为教官
+
 }
 module.exports = api
