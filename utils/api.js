@@ -54,6 +54,9 @@ const api = {
     getBecomeCoachQrCodeApi: hostBase+'/armed/phone/getInstructorQrCode',//获取成为教官二维码
     becomeCoachApi: hostBase+'/armed/phone/scanInstructorQrCode',//扫码成为教官
     cancelCoachApi: hostBase+'/armed/phone/cancelInstructor',//取消成为教官
-
+    coachSetActivityApi: hostBase+'/armed/phone/instructorSetActivity',//教官开启某个活动扫码
+    getRobotQrCodeApi: hostBase+'/armed/phone/getRobotQrCode',//获取获得AR机器人勋章二维码
+    getRobotMedalApi: hostBase+'/armed/phone/addRobotMedal',//扫码获得AR机器人体验勋章
+    coachQueryMedalListApi: hostBase+'/armed/phone/getInstructorMedalList',//教官查询勋章列表
 }
 module.exports = api

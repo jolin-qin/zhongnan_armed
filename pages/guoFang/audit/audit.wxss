@@ -203,8 +203,8 @@ page {
 
 .tab_wrapper .tab_item {
     display: inline-block;
-    /* width: 224rpx; */
-    width: 33.3%;
+    width: 224rpx;
+    /* width: 33.3%; */
     height: 72rpx;
     line-height: 72rpx;
     text-align: center;
@@ -314,16 +314,12 @@ page {
     background: url('https://zntest.wxumi.com/guofang/audit/rukou_btn_djsh.png') no-repeat center;
     background-size: 140rpx 48rpx;
 }
-
-
 .danmu_item .time_wrapper .deleteBtn {
     width: 120rpx;
 }
-
 .badge_container {
     margin-top: 24rpx;
 }
-
 .badge_item,
 .danmu_item,
 .user_item {
@@ -760,4 +756,11 @@ page {
     text-align: center;
     color: #fff;
     font-size: 36rpx;
+}
+/* end */
+.coach_item_deletebtn {
+    width: 120rpx;
+    height: 48rpx;
+    background: url('https://zntest.wxumi.com/guofang/audit/rukou_btn_sc.png') no-repeat center;
+    background-size: 120rpx 48rpx;
 }

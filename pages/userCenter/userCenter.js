@@ -51,6 +51,7 @@ Page({
         setTeamInforPopup: false,
         btnText: '确 定',
         generatedTime: '', //成为教官二维码生成的时间
+        robotQrCodeParam: '',
         teamObj: {}
     },
 
@@ -87,8 +88,11 @@ Page({
                 }
                 //成为教官二维码里带了‘tm’字段
                 if (way === '16') {
-                    let generatedTime = value.get("tm")
-                    this.setData({ generatedTime })
+                    this.setData({ generatedTime: value.get("tm") })
+                }
+                //机器人勋章二维码里带了‘ad’字段
+                if (way === '17') {
+                    this.setData({ robotQrCodeParam: value.get("ad") })
                 }
             }
             if (positionId) {
@@ -99,7 +103,7 @@ Page({
                 oldUserCenterPage: 'guoFang'
             })
         }
-        app.globalData.entryWay = '11'
+        // app.globalData.entryWay = '17'
         this.isAuthorizationFun()
 
     },
@@ -191,16 +195,17 @@ Page({
                                             userId: app.globalData.userId,
                                             proType: 0
                                         }, 'application/x-www-form-urlencoded').then((res) => {
-                                            console.log("迎宾词:", res)
+                                            // console.log("迎宾词:", res)
                                             if (res.code === 200) {
                                                 //有上个团队的信息，并且userId对不上
-                                                if (res?.data?.id) {
+                                                if (res?.data?.activityId) {
+                                                    res.data.id = res.data.activityId
                                                     self.setData({
                                                         teamObj: res.data,
                                                         setTeamInforPopup: true
                                                     })
                                                     //另一个教官要覆盖上一个教官的了
-                                                    if (res.data.userId !== app.globalData.userInfo.userId) {
+                                                    if (res.data.userId !== app.globalData.userId) {
                                                         self.setData({ btnText: '新 建' })
                                                     } else {
                                                         //同一教官再次扫签到二维码
@@ -237,68 +242,84 @@ Page({
                                     
                                     //弹幕
                                 } else if (app.globalData.entryWay === '12') {
-                                    wx.switchTab({
-                                        url: '/pages/guoFang/barrage/barrage'
-                                    })
+                                    //教官
+                                    if (app.globalData.userInfo.instructorFlag) {
+                                        self.coachSetActivityFun('12', '弹幕')
+                                    } else {
+                                        wx.switchTab({
+                                            url: '/pages/guoFang/barrage/barrage'
+                                        })
+                                    }
                                     //测试
                                 } else if (app.globalData.entryWay === '13') {
-                                    common.request(API.saveBehaviorApi, {
-                                        openId: app.globalData.openId,
-                                        proType: 1,
-                                        eqNumber: app.globalData.eqNumber
-                                    }).then((res) => {
-                                        app.globalData.eqNumber = ''
-                                    }).catch((err) => {
-                                        app.globalData.eqNumber = ''
-                                    })
-                                    wx.navigateTo({
-                                        url: '/pages/guoFang/testStart/testStart'
-                                    })
+                                    if (app.globalData.userInfo.instructorFlag) {
+                                        self.coachSetActivityFun('13', '国防知识测试')
+                                    } else {
+                                        common.request(API.saveBehaviorApi, {
+                                            openId: app.globalData.openId,
+                                            proType: 1,
+                                            eqNumber: app.globalData.eqNumber
+                                        }).then((res) => {
+                                            app.globalData.eqNumber = ''
+                                        }).catch((err) => {
+                                            app.globalData.eqNumber = ''
+                                        })
+                                        wx.navigateTo({
+                                            url: '/pages/guoFang/testStart/testStart'
+                                        })
+                                    }
                                     //AR换装
                                 } else if (app.globalData.entryWay === '14') {
-                                    //测试过了，可以玩AR换装
-                                    if (res.data.isAIok === '1') {
-                                        common.request(API.scanARapi, {
-                                            userId: app.globalData.userId,
-                                            proType: 0
-                                        }, 'application/x-www-form-urlencoded').then((res) => {
-                                            console.log("玩AR了：", res)
-                                            if (res.code === 200) {
-                                                wx.showModal({
-                                                    title: '提示',
-                                                    content: '请在大屏上玩AR换装吧',
-                                                    showCancel: false,
-                                                    confirmText: '确定',
-                                                    success(res) {
-                                                        if (res.confirm) {
-
-                                                        } else if (res.cancel) {
-
-                                                        }
-                                                    }
-                                                })
-                                            } else {
-                                                common.Toast(res.msg)
-                                            }
-                                        })
-                                        //没过也要请求下接口
+                                    //教官扫的码
+                                    if (app.globalData.userInfo.instructorFlag) {
+                                        self.coachSetActivityFun('14', '国之重器')
                                     } else {
-                                        common.request(API.scanARapi, {
-                                            userId: app.globalData.userId,
-                                            proType: 0
-                                        }, 'application/x-www-form-urlencoded').then((res) => {
-                                            console.log("没资格玩AR：", res)
-                                        })
-                                        self.goStartAnswerPage()
+                                        //测试过了，可以玩AR换装
+                                        if (res.data.isAIok === '1') {
+                                            common.request(API.scanARapi, {
+                                                userId: app.globalData.userId,
+                                                proType: 0
+                                            }, 'application/x-www-form-urlencoded').then((res) => {
+                                                console.log("玩AR了：", res)
+                                                if (res.code === 200) {
+                                                    wx.showModal({
+                                                        title: '提示',
+                                                        content: '请在大屏上玩AR换装吧',
+                                                        showCancel: false,
+                                                        confirmText: '确定',
+                                                        success(res) {
+                                                            if (res.confirm) {} else if (res.cancel) {}
+                                                        }
+                                                    })
+                                                } else {
+                                                    common.Toast(res.msg)
+                                                }
+                                            })
+                                            //没过也要请求下接口
+                                        } else {
+                                            common.request(API.scanARapi, {
+                                                userId: app.globalData.userId,
+                                                proType: 0
+                                            }, 'application/x-www-form-urlencoded').then((res) => {
+                                                console.log("没资格玩AR：", res)
+                                            })
+                                            self.goStartAnswerPage()
+                                        }
                                     }
+                                    
                                     //AI人脸融合
                                 } else if (app.globalData.entryWay === '15') {
-                                    if (res.data.isAIok === '1') {
-                                        wx.navigateTo({
-                                            url: '/pages/guoFang/AIdetection/AIdetection'
-                                        })
+                                    //教官扫码
+                                    if (app.globalData.userInfo.instructorFlag) {
+                                        self.coachSetActivityFun('15', '最美军装照')
                                     } else {
-                                        self.goStartAnswerPage()
+                                        if (res.data.isAIok === '1') {
+                                            wx.navigateTo({
+                                                url: '/pages/guoFang/AIdetection/AIdetection'
+                                            })
+                                        } else {
+                                            self.goStartAnswerPage()
+                                        }
                                     }
                                     //成为教官
                                 } else if (app.globalData.entryWay === '16') {
@@ -308,6 +329,18 @@ Page({
                                     }, 'application/x-www-form-urlencoded').then((res) => {
                                         if (res.code === 200) {
                                             common.Toast("恭喜您成为教官!")
+                                        } else {
+                                            common.Toast(res.msg)
+                                        }
+                                    })
+                                    //获取机器人勋章请求的接口
+                                } else if (app.globalData.entryWay === '17') {
+                                    common.request(API.getRobotMedalApi, {
+                                        userId: app.globalData.userId,
+                                        activityId: self.data.robotQrCodeParam
+                                    }, 'application/x-www-form-urlencoded').then((res) => {
+                                        if (res.code === 200) {
+                                            common.Toast("获取机器人勋章成功!")
                                         } else {
                                             common.Toast(res.msg)
                                         }
@@ -440,6 +473,9 @@ Page({
                             passwordList: [],
                             inputValue: ''
                         })
+                        //保存身份到全局变量
+                        app.globalData.isManager = res.data.isManager
+                        app.globalData.isInstructor = res.data.isInstructor
                         wx.navigateTo({
                             url: '/pages/guoFang/audit/audit'
                         })
@@ -847,7 +883,6 @@ Page({
         if (this.data.teamObj.teamTitle && this.data.teamObj.contentText && this.data.teamObj.personSum) {
             //有上个团队信息
             if (this.data.btnText === '确 定') {
-                
                 let requestData = Object.assign(this.data.teamObj, {userId: app.globalData.userId,proType: 0})
                 console.log("teamObj~~~~~~:", requestData)
                 //有id传id
@@ -867,11 +902,28 @@ Page({
                     btnText: '确 定'
                 })
             }
-            
-            
         } else {
             common.Toast('内容不能为空')
         }
+    },
+    //教官开启活动函数
+    coachSetActivityFun(qrCodeType, activityName) {
+        common.request(API.coachSetActivityApi, {
+            userId: app.globalData.userId,
+            qrCodeType: qrCodeType
+        }, 'application/x-www-form-urlencoded').then((res) => {
+            if (res.code === 200) {
+                if (res.data.isSetSigin) {
+                    common.Toast(`${activityName}活动开启成功`)
+                } else {
+                    common.Toast(`${activityName}活动开启失败`)
+                }
+            } else {
+                common.Toast(res.msg)
+            }
+        }).catch((err) => {
+            console.log("我出错了")
+        })
     },
     /**
      * 生命周期函数--监听页面隐藏

@@ -28,5 +28,7 @@ App({
         sort: '', //分为武装部，国防教育
         tempImagePath: '', //拍的照片二进制流
         eqNumber: '',//二维码带的标识
+        isManager: false, //管理员
+        isInstructor: false, //教官
     }
 })

@@ -46,22 +46,17 @@ Page({
         sexIndex: 0, //默认  女
         nameInput: '',
         testType: '',
-        welcomePopup: false,
-        inputValue: '',
-        startTime: '', //开始时间
-        endTime: '', //结束时间
-        openType: '', //打来时间选择弹窗的方式
-        currentDate: new Date().getTime(),
-        minDate: new Date().getTime(),
-        serverShow: false,
-        welcomeId: '',
         excelList: [],
         signInPopup: false,
         coachPopup: false,
         medalPopup: false,
         playUserList: [1,2,3,4,5,6,7,8,9], //应到人数
+        due: 0, //应到人数
         btnIndex: '0',
         coachImgUrl: '', //成为教官二维码
+        robotMedalImgUrl: '', //机器人勋章二维码
+        isManager: false,
+        isInstructor: false
     },
 
     /**
@@ -70,7 +65,9 @@ Page({
     onLoad: function (options) {
         this.setData({
             userInfo: app.globalData.userInfo,
-            testType: app.globalData.globalCategory
+            testType: app.globalData.globalCategory,
+            isManager: app.globalData.isManager,
+            isInstructor: app.globalData.isInstructor
         })
         //this.getWaitBadgeListFun('N',true) //待审核徽章列表,刚进页面我只需要知道待审核徽章数量就行，不用为dataList赋值
         this.getWaitBarrageListFun('N') //待审核弹幕列表
@@ -89,148 +86,6 @@ Page({
     onShow: function () {
 
     },
-    openPopup() {
-        this.setData({
-            welcomePopup: true,
-            inputValue: ''
-        })
-        this.getFun()
-    },
-    openBikePopup() {
-        this.setData({ welcomePopup: true })
-    },
-    closeWelcomePopup() {
-        this.setData({
-            welcomePopup: false
-        })
-    },
-    bindTextAreaBlur(e) {
-        console.log(e.detail.value)
-        this.setData({
-            inputValue: e.detail.value
-        })
-    },
-    getFun() {
-        wx.request({
-            url: API.getWelcomeApi,
-            data: {
-                proType: 0
-            },
-            method: "POST",
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            success: (res) => {
-                console.log("获取成功啦:", res)
-                if (res.data.code == 200) {
-                    if (res.data?.data?.id) {
-                        this.setData({
-                            inputValue: res.data.data.contentText,
-                            startTime: res.data.data.beginTime,
-                            endTime: res.data.data.endTime,
-                            welcomeId: res.data.data.id
-                        })
-                    }
-                } else {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                        duration: 2000
-                    })
-                }
-            }
-        });
-    },
-    //开始时间选择
-    handleStartTimeClick(e) {
-        this.setData({
-            serverShow: true,
-            openType: e.currentTarget.dataset.type
-        })
-    },
-    closeStartTimePopup() {
-        this.setData({
-            serverShow: false
-        })
-    },
-    startConfirm(e) {
-        let time = this.timeFormat(new Date(e.detail))
-        console.log("选择时间后原始格式：", time)
-        if (this.data.openType === 'start') {
-            this.setData({
-                serverShow: false,
-                startTime: time
-            })
-        } else if (this.data.openType === 'end') {
-            this.setData({
-                serverShow: false,
-                endTime: time
-            })
-        }
-    },
-
-    // 时间格式化 2019-09-08
-    timeFormat(time) {
-        let year = time.getFullYear(),
-            month = time.getMonth() + 1,
-            day = time.getDate(),
-            hour = time.getHours(),
-            minutes = time.getMinutes();
-        let finallyMonth = month >= 10 ? month : '0' + month;
-        let finallDay = day >= 10 ? day : '0' + day;
-        let finallyHour = hour >= 10 ? hour : '0' + hour;
-        let finallyMinute = minutes >= 10 ? minutes : '0' + minutes;
-
-        return year + '-' + finallyMonth + '-' + finallDay + ' ' + finallyHour + ':' + finallyMinute + ':00'
-    },
-
-    setFun() {
-        if (this.data.inputValue && this.data.startTime && this.data.endTime) {
-            let datas = {
-                proType: 0,
-                welcomeConfig: this.data.inputValue,
-                beginTime: this.data.startTime,
-                endTime: this.data.endTime
-            }
-            if (this.data.welcomeId) {
-                datas.id = this.data.welcomeId
-            }
-            wx.request({
-                url: API.setWelcomeApi,
-                data: datas,
-                method: "POST",
-                header: {
-                    'content-type': 'application/x-www-form-urlencoded'
-                },
-                success: (res) => {
-                    console.log("设置成功啦:", res)
-                    if (res.data.code == 200) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                            duration: 2000
-                        })
-                        this.setData({
-                            welcomePopup: false
-                        })
-                    } else {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    }
-                }
-            });
-        } else {
-            wx.showToast({
-                title: '内容不能为空',
-                icon: 'none',
-                duration: 2000
-            })
-        }
-    },
-
     // 点击tab切换
     tabClick(e) {
         let tabIndex = e.currentTarget.dataset.tab
@@ -239,7 +94,8 @@ Page({
             tabIndex: tabIndex,
             dataList: [],
             pageNo: 1,
-            tabTyp: typIndex
+            tabTyp: typIndex,
+            searchName: ''
         })
         if (tabIndex === '0') {
             this.getWaitBarrageListFun('N')
@@ -251,6 +107,8 @@ Page({
             this.getWaitBadgeListFun('Y')
         } else if (tabIndex === '4') {
             this.getUserListFun()
+        } else if (tabIndex === '5') {
+            this.getUserListFun('coach')
         }
     },
     // 获取弹幕列表
@@ -341,36 +199,35 @@ Page({
         })
     },
     // 获取用户列表
-    getUserListFun() {
-        common.request(API.getUserListApi, {
+    getUserListFun(type) {
+        let requestData = {
             tableName: "ar_user",
             paging: {
                 pageNumber: this.data.pageNo,
                 pageSize: this.data.pageSize
             }
-        }).then((res) => {
+        }
+        if (type === 'coach') {
+            requestData.filters = {
+                instructorFlag: {
+                    type: "eq",
+                    value: 1
+                }
+            }
+        }
+        common.request(API.getUserListApi, requestData).then((res) => {
             console.log("获取用户列表接口成功啦:", res)
             if (res.code === 200) {
                 let totalArr = res.total
-                this.setData({
-                    dataList: this.data.dataList.concat(res.rows)
-                })
+                this.setData({ dataList: this.data.dataList.concat(res.rows) })
                 if (totalArr >= this.data.pageSize) {
-                    this.setData({
-                        isReachBottom: true
-                    })
+                    this.setData({ isReachBottom: true })
                 } else {
-                    this.setData({
-                        isReachBottom: false
-                    })
+                    this.setData({ isReachBottom: false })
                 }
                 console.log("能否继续滚动：", this.data.isReachBottom)
             } else {
-                wx.showToast({
-                    title: res.msg,
-                    icon: 'none',
-                    duration: 2000
-                })
+                common.Toast(res.msg)
             }
         })
     },
@@ -546,25 +403,15 @@ Page({
                         pageNo: 1,
                         dataList: []
                     })
-                    wx.showToast({
-                        title: '操作成功',
-                        icon: 'none',
-                        duration: 1500
-                    })
+                    common.Toast('操作成功')
                     setTimeout(() => {
                         this.getWaitBarrageListFun('Y')
                     }, 100)
                 } else {
-                    wx.showToast({
-                        title: res.msg,
-                        icon: 'none',
-                        duration: 2000
-                    })
+                    common.Toast(res.msg)
                 }
             })
-        }).catch(() => {
-
-        });
+        }).catch(() => {});
     },
     //删除徽章
     deleteFun1(e) {
@@ -830,18 +677,23 @@ Page({
     //搜索用户
     onSearch(e) {
         console.log("搜索输入值:", e.detail)
-        this.setData({
-            searchName: e.detail
-        })
+        this.setData({ searchName: e.detail })
         if (e.detail) {
-            common.request(API.getUserListApi, {
-                tableName: "cs_user",
-                filters: {
-                    name: {
-                        type: "eq",
-                        value: this.data.searchName
-                    }
+            let requesQuery = {
+                name: {
+                    type: "eq",
+                    value: e.detail
                 }
+            }
+            if (this.data.tabIndex === '5') {
+                requesQuery.instructorFlag = {
+                    type: "eq",
+                    value: 1
+                }
+            }
+            common.request(API.getUserListApi, {
+                tableName: "ar_user",
+                filters: requesQuery
             }).then((res) => {
                 console.log("搜索接口成功啦:", res)
                 if (res.code === 200) {
@@ -860,7 +712,12 @@ Page({
             pageNo: 1,
             dataList: []
         })
-        this.getUserListFun()
+        //区分是在哪个tabIndex下
+        if (this.data.tabIndex === '4') {
+            this.getUserListFun()
+        } else if (this.data.tabIndex === '5') {
+            this.getUserListFun('coach')
+        }
     },
     onClose() {
         this.setData({
@@ -902,10 +759,7 @@ Page({
             }
         })
     },
-    //打开获取机器人勋章弹窗
-    handleOpenMedalPopup() {
-        this.setData({ medalPopup: true })
-    },
+    
     downloadFun(e) {
         let {id, name} = e.currentTarget.dataset
         wx.downloadFile({
@@ -928,6 +782,64 @@ Page({
                 console.log("下载文件失败了")
             }
         })
+    },
+    //删除教官
+    deleteCoachFun(e) {
+        let clickId = e.currentTarget.dataset.id
+        // 确认框
+        Dialog.confirm({
+            title: '确认提示',
+            message: '是否确定删除此条数据？'
+        }).then(() => {
+            // 发送请求
+            common.request(API.cancelCoachApi, {
+                userId: clickId,
+            }, 'application/x-www-form-urlencoded').then((res) => {
+                console.log("删除接口成功啦:", res)
+                if (res.code === 200) {
+                    // this.setData({
+                    //     pageNo: 1,
+                    //     dataList: []
+                    // })
+                    common.Toast('操作成功')
+                    let deleteIndex = this.data.dataList.findIndex(item => {
+                        return item.id === clickId
+                    })
+                    this.data.dataList.splice(deleteIndex, 1)
+                    this.setData({ dataList: this.data.dataList })
+                    // setTimeout(() => {
+                    //     this.getWaitBarrageListFun('Y')
+                    // }, 100)
+                } else {
+                    common.Toast(res.msg)
+                }
+            })
+        }).catch(() => {});
+    },
+    //打开获取机器人勋章二维码弹窗
+    handleOpenMedalPopup() {
+        common.request(API.getRobotQrCodeApi, {
+            userId: app.globalData.userId
+        }, 'application/x-www-form-urlencoded').then((res) => {
+            // console.log("excel列表成功了:", res)
+            if (res.code === 200) {
+                this.setData({ robotMedalImgUrl: res.data, medalPopup: true })
+            }
+        })
+    },
+    handleClickBtnChange(e) {
+        let clickIdx = e.currentTarget.dataset.idx
+        if (clickIdx === '1') {
+            common.request(API.coachQueryMedalListApi, {
+                userId: app.globalData.userId
+            }, 'application/x-www-form-urlencoded').then((res) => {
+                console.log("excel列表成功了:", res)
+                if (res.code === 200) {
+                    this.setData({ due: res.data.personSum, playUserList: res.data.detailList || [] })
+                }
+            })
+        }
+        this.setData({ btnIndex: clickIdx })
     },
     /**
      * 生命周期函数--监听页面隐藏
@@ -968,6 +880,8 @@ Page({
                 this.getWaitBadgeListFun('Y')
             } else if (this.data.tabIndex === '4') {
                 this.getUserListFun()
+            } else if (this.data.tabIndex === '5') {
+                this.getUserListFun('coach')
             }
         }
     },

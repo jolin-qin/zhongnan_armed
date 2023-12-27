@@ -32,22 +32,22 @@
             <image src="{{userInfo.headImgUrl}}" mode="aspectFit" class="height"></image>
         </view>
         <!-- 搜索 -->
-        <van-search value="{{ searchName }}" custom-class="searchBox" show-action bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入用户姓名搜索" wx:if="{{tabIndex === '4'}}" />
+        <van-search value="{{ searchName }}" custom-class="searchBox" show-action bind:cancel="onSearchCancel" bind:search="onSearch" placeholder="请输入姓名搜索" wx:if="{{tabIndex === '4' || tabIndex === '5'}}" />
         <view class="nickname">{{userInfo.name}}</view>
         <!-- 欢迎语设置 -->
-        <view class="welcome" bindtap="openPopup">
+        <!-- <view class="welcome" bindtap="openPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_qiandao.png"></image>
-        </view>
+        </view> -->
 
         <view class="welcome sign-in" bindtap="handleOpenSignInPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_icon_lsjl.png"></image>
         </view>
         <!-- 成为教官 -->
-        <view class="new_welcome coach" bindtap="handleOpenCoachPopup">
+        <view wx:if="{{isManager}}" class="new_welcome coach" bindtap="handleOpenCoachPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
         </view>
         <!-- 机器人勋章 -->
-        <view class="new_welcome robot_medal" bindtap="handleOpenMedalPopup">
+        <view wx:if="{{isInstructor}}" class="new_welcome robot_medal" bindtap="handleOpenMedalPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_iocn_xunzhang.png"></image>
         </view>
         <!-- tab切换 -->
@@ -62,6 +62,9 @@
 
             <view class="tab_item {{tabIndex === '4' ? 'active':'' }}" data-tab="4" bindtap="tabClick">
                 <text class="tab_title">用户列表</text>
+            </view>
+            <view wx:if="{{isManager}}" class="tab_item {{tabIndex === '5' ? 'active':'' }}" data-tab="5" bindtap="tabClick">
+                <text class="tab_title">教官列表</text>
             </view>
         </scroll-view>
     </view>
@@ -78,12 +81,7 @@
                         <view class="name">{{item.userName}}</view>
                         <view class="grade">{{item.college}} {{item.grade}} {{item.class}}</view>
                     </view>
-                    <block>
-                        <!-- <view class="ongoing status_btn" wx:if="{{statusValue === '0'}}">审核中</view> -->
-                        <!-- <view class="ongoing status_btn" wx:if="{{statusValue === '1'}}">未审核</view> -->
-                        <view class="ongoing status_btn">未审核</view>
-                        <!-- <view class="had_pass_status status_btn" wx:else>已审核</view> -->
-                    </block>
+                    <view class="ongoing status_btn">未审核</view>
                 </view>
                 <view class="danmu_wrapper">
                     <text class="danmu_title">弹幕内容：</text>
@@ -94,7 +92,7 @@
                         <text>提交时间：</text>
                         <text>{{item.date}}</text>
                     </view>
-                    <view class="audit__btn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="auditFun"></view>
+                    <view wx:if="{{isManager}}" class="audit__btn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="auditFun"></view>
                 </view>
             </view>
         </view>
@@ -126,7 +124,7 @@
                         <text decode="{{true}}">审&ensp;核&ensp;人：</text>
                         <text>{{item.approveUserName}}</text>
                     </view>
-                    <view class="auditBtns deleteBtn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="deleteFun"></view>
+                    <view wx:if="{{isManager}}" class="auditBtns deleteBtn" data-id="{{item.barrageId}}" data-genre="barrage" bindtap="deleteFun"></view>
                 </view>
             </view>
         </view>
@@ -135,7 +133,6 @@
             <view class="noMore" wx:else>~暂无更多数据了~</view>
         </block>
     </view>
-
 
     <!-- 用户列表 -->
     <view class="user_tab_item" wx:if="{{tabIndex === '4'}}">
@@ -149,7 +146,32 @@
                         <view class="name">{{item.name}}</view>
                         <view class="grade">{{item.departmentIndex_name_column_qp}} {{item.gradeIndex_name_column_qp}} {{item.classIndex_name_column_qp}}</view>
                     </view>
-                    <view class="ongoing status_btn" data-items="{{item}}" bindtap="edit">修改</view>
+                    <view wx:if="{{isManager}}" class="ongoing status_btn" data-items="{{item}}" bindtap="edit">修改</view>
+                </view>
+            </view>
+        </view>
+        <block>
+            <van-loading class="loading" wx:if="{{isReachBottom}}" type="spinner" />
+            <view class="noMore" wx:else>~暂无更多数据了~</view>
+        </block>
+    </view>
+    <!-- 教官列表 -->
+    <view class="user_tab_item" wx:if="{{tabIndex === '5'}}">
+        <view class="danmu_container">
+            <view class="user_item" wx:for="{{dataList}}" wx:key="index">
+                <view class="flex_start">
+                    <view class="portrait">
+                        <image class="height" src="{{item.headImgUrl}}"></image>
+                    </view>
+                    <view class="studentInfor">
+                        <view class="name">{{item.name}}</view>
+                        <view class="grade">{{item.departmentIndex_name_column_qp}} {{item.gradeIndex_name_column_qp}} {{item.classIndex_name_column_qp}}</view>
+                    </view>
+                    
+                </view>
+                <view class="flex_between">
+                    <view></view>
+                    <view class="coach_item_deletebtn" data-id="{{item.id}}" bindtap="deleteCoachFun"></view>
                 </view>
             </view>
         </view>
@@ -201,33 +223,7 @@
             </form>
         </view>
     </van-popup>
-    <!-- 设置欢迎语弹窗 -->
-    <van-popup show="{{ welcomePopup }}" custom-class="information_popup">
-        <view class="welcome_popup">
-            <view class="title flex_center">
-                <image class="icon" src="{{imgFriendUrl}}chengxin/ssyb_x.png" bindtap="closeWelcomePopup"></image>
-                <text class="content">请输入参观单位</text>
-            </view>
-            <view class="time__item flex_between" data-type="start" bindtap="handleStartTimeClick">
-                <view>开始时间</view>
-                <view class="flex_start">
-                    <input type="text" class="input_search" value="{{startTime}}" placeholder="请选择" disabled="{{true}}" />
-                    <van-icon name="arrow" color="#999999" />
-                </view>
-            </view>
-            <view class="time__item flex_between" data-type="end" bindtap="handleStartTimeClick">
-                <view>结束时间</view>
-                <view class="flex_start">
-                    <input type="text" class="input_search" value="{{endTime}}" placeholder="请选择" disabled="{{true}}" />
-                    <van-icon name="arrow" color="#999999" />
-                </view>
-            </view>
-            <block>
-                <textarea name="welcome" value="{{inputValue}}" bindinput="bindTextAreaBlur" class="textarea"></textarea>
-                <view class="set__btn" bindtap="setFun"></view>
-            </block>
-        </view>
-    </van-popup>
+    
     <!-- 成为教官二维码 -->
     <van-popup show="{{ coachPopup }}" custom-class="information_popup" closeable close-icon="close" bind:close="coachPopupClose">
         <view class="coach_popup">
@@ -249,8 +245,9 @@
             <view class="title">历史签到记录</view>
             <scroll-view scroll-y="true" class="popup_scroll">
                 <view class="scroll__item" wx:for="{{excelList}}" wx:key="index">
-                    <view class="scroll__item__time">时间:{{item.beginTime}}--{{item.endTime}}</view>
-                    <view>内容: {{item.contentText}}</view>
+                    <view>教官名称: {{item.nickName}}</view>
+                    <view>团队标题: {{item.teamTitle}}</view>
+                    <view class="scroll__item__time">活动时间: {{item.createTime}}</view>
                     <view class="download__btn" data-id="{{item.id}}" data-name="{{item.contentText}}" bindtap="downloadFun"></view>
                 </view>
             </scroll-view>
@@ -272,13 +269,13 @@
             </view>
             <!-- 二维码展示 -->
             <block wx:if="{{btnIndex === '0'}}">
-                <image class="getMedalQRcode" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
+                <image class="getMedalQRcode" src="{{robotMedalImgUrl}}"></image>
             </block>
             <!-- 勋章列表 -->
             <block wx:else>
                 <view class="corner">
                     <view class="corner_title">
-                        应到<text class="color_text">50</text>人，<text class="color_text">40</text>人体验
+                        应到<text class="color_text">{{due}}</text>人，<text class="color_text">{{playUserList.length}}</text>人体验
                     </view>
                     <!-- 勋章展示列表 -->
                     <view class="medal_list flex_between">
@@ -314,36 +311,43 @@
                 </view>
                 <scroll-view scroll-y="true" class="medal_scroll">
                     <view class="scroll__item flex_start" wx:for="{{playUserList}}" wx:key="index">
-                        <view class="left">用户名字昵称</view>
+                        <view class="left">{{item.userName}}</view>
                         <view class="right flex_between">
+                            <!-- 国之重器 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.PC_AR_HZ}}" class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
                             </block>
+                            <!-- 测试勋章 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_ceshi2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.MOBILE_TEST}}" class="item__icon" src="{{imgUrl}}xunzhang_ceshi2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
                             </block>
+                            <!-- 弹幕勋章 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.BARRAGE}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
                             </block>
+                            <!-- 签到勋章 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.SIGNIN}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
                             </block>
+                            <!-- 最美军装勋章 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.MOBILE_AI}}" class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
                             </block>
+                            <!-- 机器人勋章 -->
                             <block>
-                                <image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.ROBOT}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
                             </block>
                         </view>
                     </view>
                 </scroll-view>
             </block>
+            <!-- 点击按钮 -->
             <view class="medal_popup_btns flex_between">
                 <view class="item_btn" data-idx="0" bindtap="handleClickBtnChange">
                     <block>
