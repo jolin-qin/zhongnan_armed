@@ -1,5 +1,6 @@
 {
     "pages": [
+        
 			"pages/userCenter/userCenter",
 			"pages/guoFang/AIphotoDetail/AIphotoDetail",
 			"pages/guoFang/AIphotoList/AIphotoList",

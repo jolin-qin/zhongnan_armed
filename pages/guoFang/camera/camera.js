@@ -28,7 +28,7 @@ Page({
 			innerAudioContent.play()
         const ctx = wx.createCameraContext()
         ctx.takePhoto({
-            quality: 'normal',
+            quality: 'high',
             success: (res) => {
                 console.log("拍照返回值:", res)
                 // this.setData({ src: res.tempImagePath })

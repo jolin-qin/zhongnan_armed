@@ -1,86 +1,75 @@
 <view class="container">
     <image class="main_title01" src="{{imgUrl}}AI/zmjzz_biaoti3.png" mode="scaleToFill"></image>
     <view class="middle__part flex_center">
-            <image
-                class="arrow__img left__arrow__img"
-                src="{{imgUrl}}AI/zmjzz_jiantou.png"
-                mode="scaleToFill"
-                bindtap="addFun"
-            ></image>
-			<view class="swiper__wrapper">
-				<swiper
-					class="swiper__content"
-					interval="2000"
-					duration="500"
-                    circular="true"
-                    current="{{speciesIndex}}"
-					bindchange="handleSwiperChange">
-						<swiper-item class="swiper__item" wx:for="{{listData}}" wx:key="index">
-							<image src="{{item.templatePath}}" class="height"></image>
-						</swiper-item>
-				</swiper>
-                <!-- 蒙层 -->
-                <view class="mask_content flex_center">
-                    <block>
-                        <!-- 1 空军 2海军 3陆军 4火箭 -->
-                        <image wx:if="{{zhongLei === 2}}" class="species__img" src="{{imgUrl}}AI/zmjzz_zi_hj.png" mode="scaleToFill"></image>
-                        <image wx:elif="{{zhongLei === 4}}" class="huojianjun__img" src="{{imgUrl}}AI/zmjzz_zi_hjj.png" mode="scaleToFill"></image>
-                        <image wx:elif="{{zhongLei === 1}}" class="species__img" src="{{imgUrl}}AI/zmjzz_zi_kj.png" mode="scaleToFill"></image>
-                        <image wx:else class="species__img" src="{{imgUrl}}AI/zmjzz_zi_lj.png" mode="scaleToFill"></image>
-                    </block>
-                </view>
-			</view>
-			
-            <image
-                class="arrow__img right__arrow__img"
-                src="{{imgUrl}}AI/zmjzz_jiantou.png"
-                mode="scaleToFill"
-                bindtap="reduceFun"
-            ></image>
-		</view>
-        <!-- 男女选择 -->
-        <van-radio-group value="{{ radio }}" bind:change="onChange" direction="horizontal" class="hazong">
-            <van-radio name="{{1}}" checked-color="#f3f566" custom-class="haha">男</van-radio>
-            <van-radio name="{{0}}" checked-color="#f3f566">女</van-radio>
-        </van-radio-group>
-		<view class="function__btns flex_between">
-			<image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_qd.png" mode="scaleToFill" bindtap="handleConfirm"></image>
-			<image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_jzjs.png" mode="scaleToFill"  bindtap="openFun"></image>
-		</view>
-		<!-- 军种介绍弹窗 -->
-		<van-popup show="{{ informationPopup }}" custom-class="information_popup">
-		    <view class="infor_popup_wrapper">
-		        <view class="title flex_between">
-							<block>
-								 <!-- 1 空军 2海军 3陆军 4火箭 -->
-								<image wx:if="{{zhongLei === 2}}" class="species__img" src="{{imgUrl}}AI/zmjzz_tc_hj.png" mode="scaleToFill"></image>
-								<image wx:elif="{{zhongLei === 4}}" class="huojianjun__img" src="{{imgUrl}}AI/zmjzz_tc_hjj.png" mode="scaleToFill"></image>
-								<image wx:elif="{{zhongLei === 1}}" class="species__img" src="{{imgUrl}}AI/zmjzz_tc_kj.png" mode="scaleToFill"></image>
-								<image wx:else class="species__img" src="{{imgUrl}}AI/zmjzz_tc_lj.png" mode="scaleToFill"></image>
-							</block>
-							<image class="close__img" src="{{imgUrl}}AI/zmjzz_btn_guanbi.png" mode="scaleToFill" bindtap="closeFun"></image>
-						</view>
-		        
-						<block>
-							<view wx:if="{{zhongLei === 2}}" class="jun__introduce">
-								<image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_hai.png" mode="scaleToFill"></image>
-								<view class="jun__content">中国人民解放军海军成立于1949年4月23日，现已发展为一支兵种齐全，常规和尖端武器兼备，具有立体攻防能力，能有效地保卫国家领海的战斗力量。主要任务是防御敌人从海上入侵，保卫领海主权，维护海洋权益。主要由水面舰艇部队、潜艇部队、航空兵、海军岸防兵和海军陆战队等兵种以及各种保障部队组成，编有北海、东海、南海三个舰队和海军航空兵部。</view>
-							</view>
-							<view wx:elif="{{zhongLei === 4}}" class="jun__introduce">
-								<image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_huojian.png" mode="scaleToFill"></image>
-								<view class="jun__content">中国人民解放军火箭军成立于2015年12月31日。1966年7月1日中国战略导弹部队（第二炮兵）正式组建，2015年12月31日第二炮兵更名为火箭军。是以地地战略导弹为主要装备、担负核反击战略作战任务的军种。</view>
-							</view>
-							<view wx:elif="{{zhongLei === 1}}" class="jun__introduce">
-								<image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_kong.png" mode="scaleToFill"></image>
-								<view class="jun__content">中国人民解放军空军于1949年11月11日在北京成立。是主要进行空中作战的军种。由航空兵、地空导弹兵、高射炮兵、雷达兵、空降兵、电子对抗、气象等多兵种合成，由歼击机、强击机、轰炸机、运输机等多机种组成的现代化的高技术军种。主要任务是担负国土防空，支援陆、海军作战，对敌后方实施空袭，进行空运和航空侦察。</view>
-							</view>
-							<view wx:else class="jun__introduce">
-								<image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_lu.png" mode="scaleToFill"></image>
-								<view class="jun__content">中国人民解放军陆军诞生于1927年8月1日，是中国共产党最早建立和领导的武装力量，是解放军历史最久的军兵种。它担负在陆地歼灭敌人的任务。中国人民解放军陆军经过九十多年的建设，现已发展成为一支具有强大火力、突击力和高度机动能力的诸兵种合成军种。2020年中国人民解放军陆军部队已基本实现全机械化。编有步兵、炮兵、装甲兵、工程兵、通讯兵、防化兵、侦察兵、电子对抗、汽车兵、测绘兵、气象兵等专业部队。</view>
-							</view>
-						</block>
-		        
-		    </view>
-		</van-popup>
-</view>
+        <image class="arrow__img left__arrow__img" src="{{imgUrl}}AI/zmjzz_jiantou.png" mode="scaleToFill" bindtap="addFun"></image>
+        <view class="swiper__wrapper">
+            <swiper class="swiper__content" interval="2000" duration="500" circular="true" current="{{speciesIndex}}" bindchange="handleSwiperChange">
+                <swiper-item class="swiper__item" wx:for="{{listData}}" wx:key="index">
+                    <image src="{{item.templatePath}}" class="height"></image>
+                </swiper-item>
+            </swiper>
+            <!-- 蒙层 -->
+            <view class="mask_content flex_center">
+                <block>
+                    <!-- 1 空军 2海军 3陆军 4火箭 -->
+                    <image wx:if="{{zhongLei === 2}}" class="species__img" src="{{imgUrl}}AI/zmjzz_zi_hj.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{zhongLei === 4}}" class="huojianjun__img" src="{{imgUrl}}AI/zmjzz_zi_hjj.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{zhongLei === 1}}" class="species__img" src="{{imgUrl}}AI/zmjzz_zi_kj.png" mode="scaleToFill"></image>
+                    <image wx:else class="species__img" src="{{imgUrl}}AI/zmjzz_zi_lj.png" mode="scaleToFill"></image>
+                </block>
+            </view>
+        </view>
 
+        <image class="arrow__img right__arrow__img" src="{{imgUrl}}AI/zmjzz_jiantou.png" mode="scaleToFill" bindtap="reduceFun"></image>
+    </view>
+    <!-- 男女选择 -->
+    <van-radio-group value="{{ radio }}" bind:change="onChange" direction="horizontal" class="hazong">
+        <van-radio name="{{1}}" checked-color="#f3f566" custom-class="haha">男</van-radio>
+        <van-radio name="{{0}}" checked-color="#f3f566">女</van-radio>
+    </van-radio-group>
+    <view class="function__btns flex_between">
+        <image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_qd.png" mode="scaleToFill" bindtap="handleConfirm"></image>
+        <image class="picture__img" src="{{imgUrl}}AI/zmjzz_btn_jzjs.png" mode="scaleToFill" bindtap="openFun"></image>
+    </view>
+    <!-- 军种介绍弹窗 -->
+    <van-popup show="{{ informationPopup }}" custom-class="information_popup">
+        <view class="infor_popup_wrapper">
+            <view class="title flex_between">
+                <block>
+                    <!-- 1 空军 2海军 3陆军 4火箭 -->
+                    <image wx:if="{{zhongLei === 2}}" class="species__img" src="{{imgUrl}}AI/zmjzz_tc_hj.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{zhongLei === 4}}" class="huojianjun__img" src="{{imgUrl}}AI/zmjzz_tc_hjj.png" mode="scaleToFill"></image>
+                    <image wx:elif="{{zhongLei === 1}}" class="species__img" src="{{imgUrl}}AI/zmjzz_tc_kj.png" mode="scaleToFill"></image>
+                    <image wx:else class="species__img" src="{{imgUrl}}AI/zmjzz_tc_lj.png" mode="scaleToFill"></image>
+                </block>
+                <image class="close__img" src="{{imgUrl}}AI/zmjzz_btn_guanbi.png" mode="scaleToFill" bindtap="closeFun"></image>
+            </view>
+
+            <block>
+                <view wx:if="{{zhongLei === 2}}" class="jun__introduce">
+                    <image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_hai.png" mode="scaleToFill"></image>
+                    <view class="jun__content">中国人民解放军海军成立于1949年4月23日，现已发展为一支兵种齐全，常规和尖端武器兼备，具有立体攻防能力，能有效地保卫国家领海的战斗力量。主要任务是防御敌人从海上入侵，保卫领海主权，维护海洋权益。主要由水面舰艇部队、潜艇部队、航空兵、海军岸防兵和海军陆战队等兵种以及各种保障部队组成，编有北海、东海、南海三个舰队和海军航空兵部。</view>
+                </view>
+                <view wx:elif="{{zhongLei === 4}}" class="jun__introduce">
+                    <image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_huojian.png" mode="scaleToFill"></image>
+                    <view class="jun__content">中国人民解放军火箭军成立于2015年12月31日。1966年7月1日中国战略导弹部队（第二炮兵）正式组建，2015年12月31日第二炮兵更名为火箭军。是以地地战略导弹为主要装备、担负核反击战略作战任务的军种。</view>
+                </view>
+                <view wx:elif="{{zhongLei === 1}}" class="jun__introduce">
+                    <image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_kong.png" mode="scaleToFill"></image>
+                    <view class="jun__content">中国人民解放军空军于1949年11月11日在北京成立。是主要进行空中作战的军种。由航空兵、地空导弹兵、高射炮兵、雷达兵、空降兵、电子对抗、气象等多兵种合成，由歼击机、强击机、轰炸机、运输机等多机种组成的现代化的高技术军种。主要任务是担负国土防空，支援陆、海军作战，对敌后方实施空袭，进行空运和航空侦察。</view>
+                </view>
+                <view wx:else class="jun__introduce">
+                    <image class="jun__hui" src="{{imgUrl}}AI/zmjzz_huizhang_lu.png" mode="scaleToFill"></image>
+                    <view class="jun__content">中国人民解放军陆军诞生于1927年8月1日，是中国共产党最早建立和领导的武装力量，是解放军历史最久的军兵种。它担负在陆地歼灭敌人的任务。中国人民解放军陆军经过九十多年的建设，现已发展成为一支具有强大火力、突击力和高度机动能力的诸兵种合成军种。2020年中国人民解放军陆军部队已基本实现全机械化。编有步兵、炮兵、装甲兵、工程兵、通讯兵、防化兵、侦察兵、电子对抗、汽车兵、测绘兵、气象兵等专业部队。</view>
+                </view>
+            </block>
+        </view>
+    </van-popup>
+    <!-- 广告弹窗 -->
+    <van-popup show="{{ adverPopup }}" custom-class="information_popup">
+        <view class="adver_popup_wrapper">
+            <image class="adver_img" src="{{imgUrl}}AI/advertImg.jpg" mode="scaleToFill"></image>
+            <view class="count_down">照片合成中，剩余{{timeNumber}}秒</view>
+        </view>
+    </van-popup>
+</view>

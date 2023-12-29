@@ -38,12 +38,12 @@
         <!-- <view class="welcome" bindtap="openPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_qiandao.png"></image>
         </view> -->
-
+        <!-- 下载 -->
         <view class="welcome sign-in" bindtap="handleOpenSignInPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_icon_lsjl.png"></image>
         </view>
         <!-- 成为教官 -->
-        <view wx:if="{{isManager}}" class="new_welcome coach" bindtap="handleOpenCoachPopup">
+        <view wx:if="{{isManager}}" class="welcome" bindtap="handleOpenCoachPopup">
             <image class="icon" src="{{imgUrl}}audit/rukou_iocn_jiaoguan.png"></image>
         </view>
         <!-- 机器人勋章 -->
@@ -277,31 +277,31 @@
                     <view class="corner_title">
                         应到<text class="color_text">{{due}}</text>人，<text class="color_text">{{playUserList.length}}</text>人体验
                     </view>
-                    <!-- 勋章展示列表 -->
+                    <!-- 勋章icon -->
                     <view class="medal_list flex_between">
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
+                            <view class="item_name">签到勋章</view>
+                        </view>
                         <view class="medal_item">
                             <image class="item_icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
                             <view class="item_name">国之重器勋章</view>
+                        </view>
+                        <view class="medal_item">
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
+                            <view class="item_name">机器人勋章</view>
                         </view>
                         <view class="medal_item">
                             <image class="item_icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
                             <view class="item_name">测试勋章</view>
                         </view>
                         <view class="medal_item">
-                            <image class="item_icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
-                            <view class="item_name">弹幕勋章</view>
-                        </view>
-                        <view class="medal_item">
-                            <image class="item_icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
-                            <view class="item_name">签到勋章</view>
-                        </view>
-                        <view class="medal_item">
                             <image class="item_icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
                             <view class="item_name">最美军装勋章</view>
                         </view>
                         <view class="medal_item">
-                            <image class="item_icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
-                            <view class="item_name">机器人勋章</view>
+                            <image class="item_icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
+                            <view class="item_name">弹幕勋章</view>
                         </view>
                     </view>
                 </view>
@@ -313,35 +313,35 @@
                     <view class="scroll__item flex_start" wx:for="{{playUserList}}" wx:key="index">
                         <view class="left">{{item.userName}}</view>
                         <view class="right flex_between">
+                            <!-- 签到勋章 -->
+                            <block>
+                                <image wx:if="{{!item.SIGNIN}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
+                            </block>
                             <!-- 国之重器 -->
                             <block>
                                 <image wx:if="{{!item.PC_AR_HZ}}" class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
+                            </block>
+                            <!-- 机器人勋章 -->
+                            <block>
+                                <image wx:if="{{!item.ROBOT}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
                             </block>
                             <!-- 测试勋章 -->
                             <block>
                                 <image wx:if="{{!item.MOBILE_TEST}}" class="item__icon" src="{{imgUrl}}xunzhang_ceshi2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_ceshi.png" mode="scaleToFill"></image>
                             </block>
-                            <!-- 弹幕勋章 -->
-                            <block>
-                                <image wx:if="{{!item.BARRAGE}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
-                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
-                            </block>
-                            <!-- 签到勋章 -->
-                            <block>
-                                <image wx:if="{{!item.SIGNIN}}" class="item__icon" src="{{imgUrl}}xunzhang_qiandao2.png" mode="scaleToFill"></image>
-                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_qiandao.png" mode="scaleToFill"></image>
-                            </block>
                             <!-- 最美军装勋章 -->
                             <block>
                                 <image wx:if="{{!item.MOBILE_AI}}" class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz2.png" mode="scaleToFill"></image>
                                 <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zmjzxz.png" mode="scaleToFill"></image>
                             </block>
-                            <!-- 机器人勋章 -->
+                            <!-- 弹幕勋章 -->
                             <block>
-                                <image wx:if="{{!item.ROBOT}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
-                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
+                                <image wx:if="{{!item.BARRAGE}}" class="item__icon" src="{{imgUrl}}xunzhang_danmu2.png" mode="scaleToFill"></image>
+                                <image wx:else class="item__icon" src="{{imgUrl}}xunzhang_danmu.png" mode="scaleToFill"></image>
                             </block>
                         </view>
                     </view>

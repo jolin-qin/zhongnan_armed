@@ -25,6 +25,10 @@ Page({
         zhongLei: '', //对应兵种
         radio: null, //  男  女
         totalData: [], //后台返回的模板
+        adverPopup: false,
+        timeNumber: 0, //倒计时
+        timer: null,
+        requestResult: {}, //合成接口请求结果
     },
 
     /**
@@ -37,7 +41,11 @@ Page({
 			// 	app.globalData.userInfo.userSex = 0
 			// }
 			
-		this.setData({ updataImg: options.photo, radio: app.globalData.userInfo.userSex })
+		this.setData({ 
+            updataImg: options.photo, 
+            radio: app.globalData.userInfo.userSex,
+            timeNumber: app.globalData.userInfo.advertTime
+         })
         this.getAItemplateFun() //获取模板
 			
     },
@@ -55,15 +63,15 @@ Page({
     onShow: function () {
 
     },
+    //合成AI照
     handleConfirm() {
         clickAudioContent.src = 'https://zntest.wxumi.com/guofang/audio/clickaudio.mp3'
         clickAudioContent.play()
         let that = this
         if (this.data.shake) {
-            this.setData({ shake: false })
-            wx.showLoading({
-                title: '合成中，请稍后',
-            })
+            this.setData({ shake: false, adverPopup: true })
+            //调用倒计时函数
+            this.countDownFun()
             wx.uploadFile({
                 url: API.compositePhotoApi, //仅为示例，非真实的接口地址
                 filePath: that.data.updataImg,
@@ -80,31 +88,73 @@ Page({
                     let result = JSON.parse(res.data)
                     if (result.code == 200) {
                         //跳转到AIphotoDetail页面
-                        let img = result.msg
-                        wx.reLaunch({
-                            url: `/pages/guoFang/AIphotoDetail/AIphotoDetail?urls=${img}&comefrom=ai`
+                        // let img = result.msg
+                        // wx.reLaunch({
+                        //     url: `/pages/guoFang/AIphotoDetail/AIphotoDetail?urls=${img}&comefrom=ai`
+                        // })
+                        that.setData({
+                            requestResult: { code: 200, img: result.msg }
                         })
                     } else {
-                        common.Toast(result.msg, 3000)
-                        that.setData({ shake: true })
-                        wx.hideLoading()
+                        // common.Toast(result.msg, 3000)
+                        // that.setData({ shake: true, adverPopup: false })
+                        that.setData({
+                            shake: true,
+                            requestResult: { code: -1, errMsg: result.msg }
+                        })
                     }
                 },
                 fail(err) {
-                    common.Toast(err.errMsg)
-                    that.setData({ shake: true })
-                    wx.hideLoading()
+                    // common.Toast(err.errMsg, 3000)
+                    // that.setData({ shake: true, adverPopup: false })
+                    that.setData({
+                        shake: true,
+                        requestResult: { code: -1, errMsg: err.errMsg }
+                    })
                 }
             })
         }
+    },
+    //倒计时
+    countDownFun() {
+        this.data.timer = setInterval(() => {
+            let guoduData = this.data.timeNumber
+            if (0 >= guoduData) {
+                if (this.data.requestResult.code === 200) {
+                    wx.reLaunch({
+                        url: `/pages/guoFang/AIphotoDetail/AIphotoDetail?urls=${this.data.requestResult.img}&comefrom=ai`
+                    })
+                } else if (this.data.requestResult.code === -1) {
+                    this.setData({ adverPopup: false })
+                    common.Toast(this.data.requestResult.errMsg, 3000)
+                    //定时器走完了，还没返回结果
+                } else {
+                    //接口还是没返回，加个3s
+                    setTimeout(() => {
+                        if (this.data.requestResult.code === 200) {
+                            wx.reLaunch({
+                                url: `/pages/guoFang/AIphotoDetail/AIphotoDetail?urls=${this.data.requestResult.img}&comefrom=ai`
+                            })
+                        } else {
+                            common.Toast('请求超时，请重新体验', 3000)
+                        }
+                    }, 3000)
+                }
+                clearInterval(this.data.timer)
+            } else {
+                this.setData({
+                    timeNumber: guoduData - 1
+                })
+            }
+        }, 1000)
     },
     //获取模板
     getAItemplateFun(e) {
         common.request(API.getAItemplateApi, {
             proType: 0
         }, 'application/x-www-form-urlencoded').then((res) => {
-            console.log("获取题目列表接口成功啦:" ,res)
-            console.log("获取题目列表接口成功啦:" ,app.globalData.userInfo)
+            // console.log("获取题目列表接口成功啦:" ,res)
+            // console.log("获取题目列表接口成功啦:" ,app.globalData.userInfo)
             
             //根据用户性别筛选模板
             let arr = res.data.filter(item => {
@@ -188,7 +238,8 @@ Page({
      */
     onUnload() {
         clickAudioContent.pause()
-		this.innerAudioContent.pause()
+        this.innerAudioContent.pause()
+        clearInterval(this.data.timer)
     },
 
     /**

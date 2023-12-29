@@ -55,7 +55,18 @@
 					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_bdhzxz.png" mode="scaleToFill"></image>
 				</block>
 				<view>
-					<view class="item__title">部队换装勋章</view>
+					<view class="item__title">国之重器勋章</view>
+					<view class="item__complete">已有{{item.personCount}}人完成</view>
+				</view>
+			</view>
+            <!-- 机器人勋章 -->
+			<view class="list__item flex_start" wx:elif="{{item.keyName === 'ROBOT'}}">
+				<block>
+					<image wx:if="{{!item.finish}}" class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz2.png" mode="scaleToFill"></image>
+					<image wx:else class="item__icon" src="{{imgUrl}}xunzhang_zjqrxz1.png" mode="scaleToFill"></image>
+				</block>
+				<view>
+					<view class="item__title">机器人勋章</view>
 					<view class="item__complete">已有{{item.personCount}}人完成</view>
 				</view>
 			</view>

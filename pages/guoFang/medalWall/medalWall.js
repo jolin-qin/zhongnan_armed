@@ -2,6 +2,7 @@
 // 获取应用实例
 const app = getApp()
 import API from "../../../utils/api.js"
+import common from "../../../utils/common.js"
 Page({
   data: {
 		imgUrl: API.imgUrl, //服务器静态图片地址
@@ -54,11 +55,7 @@ Page({
 						ratio
 					})
         } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 2000
-          })
+          common.Toast(res.data.msg)
         }
       }
     });

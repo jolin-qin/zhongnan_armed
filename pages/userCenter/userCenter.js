@@ -103,7 +103,7 @@ Page({
                 oldUserCenterPage: 'guoFang'
             })
         }
-        // app.globalData.entryWay = '17'
+        // app.globalData.entryWay = '15'
         this.isAuthorizationFun()
 
     },
