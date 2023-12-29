@@ -821,10 +821,14 @@ Page({
         common.request(API.getRobotQrCodeApi, {
             userId: app.globalData.userId
         }, 'application/x-www-form-urlencoded').then((res) => {
-            // console.log("excel列表成功了:", res)
+            console.log("excel列表成功了:", res)
             if (res.code === 200) {
                 this.setData({ robotMedalImgUrl: res.data, medalPopup: true })
+            } else {
+                common.Toast(res.msg)
             }
+        }).catch((err) => {
+            common.Toast('请求出错啦')
         })
     },
     handleClickBtnChange(e) {

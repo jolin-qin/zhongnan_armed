@@ -233,7 +233,9 @@ page {
     border-left: none;
     border-radius: 0 6rpx 6rpx 0;
 }
-
+.tab_wrapper .newclass {
+    width: 33.3%;
+}
 /* 弹幕css */
 /* .danmu_item {
     width: 710rpx;

@@ -1,6 +1,6 @@
 //现在的
-const hostBase = 'https://myznpro.wxumi.com'
-// const hostBase = 'https://armedzn.hnlvw.com'
+// const hostBase = 'https://myznpro.wxumi.com'
+const hostBase = 'https://armedzn.hnlvw.com'
 const imgBase = 'https://zntest.wxumi.com'
 const api = {
 	imgFriendUrl: imgBase + '/newsImgs/',//借用友善厅的图片地址

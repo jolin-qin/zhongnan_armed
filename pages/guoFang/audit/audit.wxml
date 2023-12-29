@@ -52,15 +52,15 @@
         </view>
         <!-- tab切换 -->
         <scroll-view scroll-x="true" class="tab_wrapper">
-            <view class="tab_item {{tabIndex === '0' ? 'active':'' }}" data-tab="0" data-index="N" bindtap="tabClick">
+            <view class="tab_item {{ tabIndex === '0' ? 'active':'' }} {{!isManager ? 'newclass' : ''}}" data-tab="0" data-index="N" bindtap="tabClick">
                 <text class="tab_title">待审核弹幕</text>
                 <text>({{waitBarrageCount}})</text>
             </view>
-            <view class="tab_item {{tabIndex === '1' ? 'active':'' }}" data-tab="1" data-index="Y" bindtap="tabClick">
+            <view class="tab_item {{ tabIndex === '1' ? 'active':'' }} {{!isManager ? 'newclass' : ''}}" data-tab="1" data-index="Y" bindtap="tabClick">
                 <text class="tab_title">已审核弹幕</text>
             </view>
 
-            <view class="tab_item {{tabIndex === '4' ? 'active':'' }}" data-tab="4" bindtap="tabClick">
+            <view class="tab_item {{ tabIndex === '4' ? 'active':'' }} {{!isManager ? 'newclass' : ''}}" data-tab="4" bindtap="tabClick">
                 <text class="tab_title">用户列表</text>
             </view>
             <view wx:if="{{isManager}}" class="tab_item {{tabIndex === '5' ? 'active':'' }}" data-tab="5" bindtap="tabClick">
