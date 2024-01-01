@@ -268,43 +268,43 @@ Page({
                                             url: '/pages/guoFang/testStart/testStart'
                                         })
                                     }
-                                    //AR换装
+                                    //国之重器
                                 } else if (app.globalData.entryWay === '14') {
                                     //教官扫的码
                                     if (app.globalData.userInfo.instructorFlag) {
                                         self.coachSetActivityFun('14', '国之重器')
                                     } else {
                                         //测试过了，可以玩AR换装
-                                        if (res.data.isAIok === '1') {
-                                            common.request(API.scanARapi, {
-                                                userId: app.globalData.userId,
-                                                proType: 0
-                                            }, 'application/x-www-form-urlencoded').then((res) => {
-                                                console.log("玩AR了：", res)
-                                                if (res.code === 200) {
-                                                    wx.showModal({
-                                                        title: '提示',
-                                                        content: '请在大屏上玩AR换装吧',
-                                                        showCancel: false,
-                                                        confirmText: '确定',
-                                                        success(res) {
-                                                            if (res.confirm) {} else if (res.cancel) {}
-                                                        }
-                                                    })
-                                                } else {
-                                                    common.Toast(res.msg)
-                                                }
-                                            })
-                                            //没过也要请求下接口
-                                        } else {
-                                            common.request(API.scanARapi, {
-                                                userId: app.globalData.userId,
-                                                proType: 0
-                                            }, 'application/x-www-form-urlencoded').then((res) => {
-                                                console.log("没资格玩AR：", res)
-                                            })
-                                            self.goStartAnswerPage()
-                                        }
+                                        
+                                        common.request(API.scanARapi, {
+                                            userId: app.globalData.userId,
+                                            proType: 0
+                                        }, 'application/x-www-form-urlencoded').then((res) => {
+                                            console.log("玩AR了：", res)
+                                            if (res.code === 200) {
+                                                wx.showModal({
+                                                    title: '提示',
+                                                    content: '请在大屏上玩AR换装吧',
+                                                    showCancel: false,
+                                                    confirmText: '确定',
+                                                    success(res) {
+                                                        if (res.confirm) {} else if (res.cancel) {}
+                                                    }
+                                                })
+                                            } else {
+                                                common.Toast(res.msg)
+                                            }
+                                        })
+                                        //没过也要请求下接口
+                                    
+                                        // common.request(API.scanARapi, {
+                                        //     userId: app.globalData.userId,
+                                        //     proType: 0
+                                        // }, 'application/x-www-form-urlencoded').then((res) => {
+                                        //     console.log("没资格玩AR：", res)
+                                        // })
+                                        // self.goStartAnswerPage()
+                                        
                                     }
                                     
                                     //AI人脸融合
